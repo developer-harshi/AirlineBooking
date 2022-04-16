@@ -28,6 +28,15 @@ namespace AdminAPIServices
         {
             services.AddControllers();
             services.AddDbContext<AdminContext>(con => con.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Swagger Admin Airline Services API",
+                    Description = "Swagger Admin Airline Services API",
+                    Version="v1"
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +54,11 @@ namespace AdminAPIServices
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Admin Airline Booking API");
             });
         }
     }

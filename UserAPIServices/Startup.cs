@@ -28,7 +28,14 @@ namespace UserAPIServices
         {
             services.AddControllers();
             services.AddDbContext<UserContext>(con => con.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
-
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Swagger User Airline Services API",
+                    Description = "Swagger User Airline Services API",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,11 @@ namespace UserAPIServices
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "User Airline Booking API");
             });
         }
     }
