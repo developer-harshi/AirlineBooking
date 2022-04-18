@@ -30,6 +30,7 @@ namespace UserAPIServices.Services
                     flightBooking.Id = Guid.NewGuid();
                     flightBooking.Status = true;
                     flightBookingModel.Id = flightBooking.Id;
+                    flightBooking.PNRNumber = DateTime.UtcNow.Day.ToString() + DateTime.UtcNow.Month.ToString() + "-" + DateTime.UtcNow.Year.ToString() + DateTime.UtcNow.Hour.ToString() + DateTime.UtcNow.Millisecond.ToString();
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
 
                 }
@@ -54,7 +55,7 @@ namespace UserAPIServices.Services
             flightBooking.NonVeg = flightBookingModel.NonVeg;
             flightBooking.NoOfBUSeats = flightBookingModel.NoOfBUSeats;
             flightBooking.NoOfNONBUSeats = flightBookingModel.NoOfNONBUSeats;
-            flightBooking.PNRNumber = flightBookingModel.PNRNumber;
+           
             flightBooking.Price = flightBookingModel.Price;
             flightBooking.Remarks = flightBookingModel.Remarks;
             flightBooking.SeatNo = flightBookingModel.SeatNo;
