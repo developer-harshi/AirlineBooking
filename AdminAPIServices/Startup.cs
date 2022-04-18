@@ -1,4 +1,5 @@
 using AdminAPIServices.Context;
+using AdminAPIServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,14 +29,16 @@ namespace AdminAPIServices
         {
             services.AddControllers();
             services.AddDbContext<AdminContext>(con => con.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
-            services.AddSwaggerGen(options => {
+            services.AddSwaggerGen(options =>
+            {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Swagger Admin Airline Services API",
                     Description = "Swagger Admin Airline Services API",
-                    Version="v1"
+                    Version = "v1"
                 });
             });
+            services.AddTransient<IAdminService, AdminService>(); //Dependency injection
 
         }
 

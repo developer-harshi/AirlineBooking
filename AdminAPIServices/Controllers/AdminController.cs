@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdminAPIServices.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +14,12 @@ namespace AdminAPIServices.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
+        public readonly IAdminService _adminSrvice;
+        public AdminController(IAdminService adminService)
+        {
+            this._adminSrvice = adminService;
+        }
+
         // GET: api/<AdminController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -42,6 +50,32 @@ namespace AdminAPIServices.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+        [HttpGet]
+        [Route("getallairlines")]
+        public ActionResult GetAllAirlines()
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetAllAirlines());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet]
+        [Route("getairline")]
+        public ActionResult GetAirline(Guid id)
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetAirline(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
