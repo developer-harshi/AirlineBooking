@@ -16,6 +16,6 @@ namespace AdminAPIServices.Services
         Flight GetFlight(Guid id);
         FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
         UserRegistrestionModel UserSignUp(UserRegistrestionModel userRegistrestionModel);
-        UserRegistrestion UserLogIn(string email, string password);
+        UserRegistrestion UserLogIn(LoginModel loginModel);
     }
 }

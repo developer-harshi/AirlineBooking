@@ -198,12 +198,12 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-        public UserRegistrestion UserLogIn(string email ,string password)
+        public UserRegistrestion UserLogIn(LoginModel loginModel)
         {
             try
             {
-                UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email.ToLower() == email.ToLower()).FirstOrDefault();
-                if (userRegistrestion != null && userRegistrestion.Password == password)
+                UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email.ToLower() == loginModel.Email.ToLower()).FirstOrDefault();
+                if (userRegistrestion != null && userRegistrestion.Password == loginModel.Password)
                 {
 
                     return userRegistrestion;

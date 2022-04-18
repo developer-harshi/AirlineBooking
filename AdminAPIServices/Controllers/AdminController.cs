@@ -125,7 +125,33 @@ namespace AdminAPIServices.Controllers
             {
                 return Ok(_adminSrvice.SearchFlights(flightSearchModel));
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPost]
+        [Route("userlogin")]
+        public ActionResult UserLogin(LoginModel loginModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.UserLogIn(loginModel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPost]
+        [Route("usersignup")]
+        public ActionResult UserSignUp(UserRegistrestionModel userRegistrestionModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.UserSignUp(userRegistrestionModel));
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
