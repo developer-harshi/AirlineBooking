@@ -1,4 +1,5 @@
-﻿using AdminAPIServices.Services;
+﻿using AdminAPIServices.Models;
+using AdminAPIServices.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,19 @@ namespace AdminAPIServices.Controllers
                 return Ok(_adminSrvice.GetAirline(id));
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPost]
+        [Route("airlineregister")]
+        public ActionResult SaveAirline(AirlineModel airlineModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.SaveAirline(airlineModel));
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex);
             }

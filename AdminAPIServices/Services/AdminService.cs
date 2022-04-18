@@ -19,32 +19,66 @@ namespace AdminAPIServices.Services
 
         public List<Airline> GetAllAirlines()
         {
-            return _adminContext.Airline.ToList();
+            try
+            {
+                return _adminContext.Airline.ToList();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
         public Airline GetAirline(Guid id)
         {
-            Airline airline = _adminContext.Airline.Where(c => c.Id == id).FirstOrDefault();
-            if (airline == null)
+            try
             {
-                airline = new Airline();
+                Airline airline = _adminContext.Airline.Where(c => c.Id == id).FirstOrDefault();
+                if (airline == null)
+                {
+                    airline = new Airline();
+                }
+                return airline;
             }
-            return airline;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public AirlineModel SaveAirline(AirlineModel airlineModel)
         {
-            Airline airline = _adminContext.Airline.Where(c => c.Id == airlineModel.Id).FirstOrDefault();
-            if (airline != null)
+            try
             {
-
+                Airline airline = _adminContext.Airline.Where(c => c.Id == airlineModel.Id).FirstOrDefault();
+                if (airline != null)
+                {
+                    FillAirlineFromAirlineModel(airlineModel, airline);
+                    airlineModel.Id = Guid.NewGuid();
+                    airline.Id = airlineModel.Id;
+                    airline.Status = true;
+                    _adminContext.Airline.Add(airline);
+                }
+                else
+                {
+                    FillAirlineFromAirlineModel(airlineModel, airline);
+                    _adminContext.Airline.Update(airline);
+                }
+                _adminContext.SaveChanges();
+                return airlineModel;
             }
-            else
+            catch (Exception ex)
             {
-
+                throw  ex;
             }
-            _adminContext.SaveChanges();
-            return airlineModel;
+           
+        }
+
+        private static void FillAirlineFromAirlineModel(AirlineModel airlineModel, Airline airline)
+        {
+            airline.ContactAddress = airlineModel.ContactAddress;
+            airline.ContactNumber = airlineModel.ContactNumber;
+            airline.Name = airlineModel.Name;
         }
     }
 }
