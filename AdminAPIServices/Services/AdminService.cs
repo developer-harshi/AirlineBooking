@@ -168,7 +168,57 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-         
+        public UserRegistrestionModel UserSignUp(UserRegistrestionModel userRegistrestionModel)
+        {
+            try
+            {
+                UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email == userRegistrestionModel.Email).FirstOrDefault();
+                if (userRegistrestion != null)
+                {
+                    throw new Exception("Email is already in use .Please try with other one .");
+                }
+                else
+                {
+                    userRegistrestion = new UserRegistrestion();
+                    userRegistrestion.Email = userRegistrestionModel.Email;
+                    userRegistrestion.Id = Guid.NewGuid();
+                    userRegistrestion.Mobile = userRegistrestionModel.Mobile;
+                    userRegistrestion.Name = userRegistrestionModel.Name;
+                    userRegistrestion.Password = userRegistrestionModel.Password;
+                    userRegistrestion.Role = userRegistrestionModel.Role;
+                    userRegistrestion.Status = true;
+                    userRegistrestionModel.Id = userRegistrestion.Id;
+                    _adminContext.UserRegistrestion.Add(userRegistrestion);
+                    _adminContext.SaveChanges();
+                }
+                return userRegistrestionModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UserRegistrestion UserLogIn(string email ,string password)
+        {
+            try
+            {
+                UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email.ToLower() == email.ToLower()).FirstOrDefault();
+                if (userRegistrestion != null && userRegistrestion.Password == password)
+                {
 
+                    return userRegistrestion;
+                }
+                else
+                {
+                    throw new Exception("Please enter valid password");
+                }
+                return userRegistrestion;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
