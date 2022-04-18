@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserAPIServices.Context;
+using UserAPIServices.Services;
 
 namespace UserAPIServices
 {
@@ -28,7 +29,8 @@ namespace UserAPIServices
         {
             services.AddControllers();
             services.AddDbContext<UserContext>(con => con.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
-            services.AddSwaggerGen(options => {
+            services.AddSwaggerGen(options =>
+            {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Swagger User Airline Services API",
@@ -36,6 +38,7 @@ namespace UserAPIServices
                     Version = "v1"
                 });
             });
+            services.AddTransient<IUserService, UserService>(); //Dependency injection
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

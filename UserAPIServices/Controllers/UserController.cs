@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserAPIServices.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +13,11 @@ namespace UserAPIServices.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        public readonly IUserService _userService;
+        public UserController(IUserService userService)
+        {
+            this._userService = userService;
+        }
         // GET: api/<UserController>
         [HttpGet]
         public IEnumerable<string> Get()
