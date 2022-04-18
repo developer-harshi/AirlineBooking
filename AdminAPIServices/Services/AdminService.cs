@@ -23,7 +23,7 @@ namespace AdminAPIServices.Services
             {
                 return _adminContext.Airline.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -39,7 +39,7 @@ namespace AdminAPIServices.Services
                 }
                 return airline;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -69,12 +69,12 @@ namespace AdminAPIServices.Services
             }
             catch (Exception ex)
             {
-                throw  ex;
+                throw ex;
             }
 
         }
 
-        private  void FillAirlineModelToEntity(AirlineModel airlineModel, Airline airline)
+        private void FillAirlineModelToEntity(AirlineModel airlineModel, Airline airline)
         {
             airline.ContactAddress = airlineModel.ContactAddress;
             airline.ContactNumber = airlineModel.ContactNumber;
@@ -107,7 +107,7 @@ namespace AdminAPIServices.Services
                 _adminContext.SaveChanges();
                 return flightModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -163,12 +163,12 @@ namespace AdminAPIServices.Services
                 }
                 return flightSearchResults;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
+         
 
-        
     }
 }
