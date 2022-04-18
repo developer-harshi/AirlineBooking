@@ -148,11 +148,20 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-        public List<Flight> SearchFlights(FlightSearchModel flightSearchModel)
+        public FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel)
         {
             try
             {
-                return _adminContext.Flights.Where(c => c.Status == true).ToList();
+                FlightSearchResults flightSearchResults = new FlightSearchResults();
+                bool isWeekend = (flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
+
+                flightSearchResults.OnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isWeekend == true ? "Week Ends" : "Week Days") || c.ToDate == flightSearchModel.SearchDate.Value.Date) && c.Status == true).ToList();
+                if (flightSearchModel.RoundTripDate != null)
+                {
+                    bool isReturnDateWeekend = (flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
+                    flightSearchResults.ReturnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isReturnDateWeekend == true ? "Week Ends" : "Week Days") || c.ToDate == flightSearchModel.SearchDate.Value.Date) && c.Status == true).ToList();
+                }
+                return flightSearchResults;
             }
             catch(Exception ex)
             {
@@ -160,9 +169,6 @@ namespace AdminAPIServices.Services
             }
         }
 
-        public List<Flight> SearchFlights()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

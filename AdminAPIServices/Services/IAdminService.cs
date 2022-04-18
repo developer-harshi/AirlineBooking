@@ -14,6 +14,6 @@ namespace AdminAPIServices.Services
         AirlineModel SaveAirline(AirlineModel airlineModel);
         FlightModel ScheduleFlight(FlightModel flightModel);
         Flight GetFlight(Guid id);
-        List<Flight> SearchFlights();
+        FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
     }
 }

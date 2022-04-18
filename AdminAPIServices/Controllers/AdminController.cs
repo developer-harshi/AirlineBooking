@@ -117,6 +117,18 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex);
             }
         }
-       
+        [HttpPost]
+        [Route("searchflight")]
+        public ActionResult SerchFlights(FlightSearchModel flightSearchModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.SearchFlights(flightSearchModel));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }
