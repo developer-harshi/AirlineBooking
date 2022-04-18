@@ -28,5 +28,8 @@ namespace UserAPIServices.Entities
         public string Role { get; set; }
         [Column("Status")]
         public bool Status { get; set; }/*bit                     null */
+        [Column("Password")]
+        [StringLength(100)]
+        public string Password { get; set; }
     }
 }

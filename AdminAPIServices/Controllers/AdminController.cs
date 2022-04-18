@@ -86,7 +86,33 @@ namespace AdminAPIServices.Controllers
             {
                 return Ok(_adminSrvice.SaveAirline(airlineModel));
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPost]
+        [Route("scheduleflight")]
+        public ActionResult ScheduleFlight(FlightModel flightModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.ScheduleFlight(flightModel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet]
+        [Route("getflight")]
+        public ActionResult GetFlight(Guid id)
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetFlight(id));
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
