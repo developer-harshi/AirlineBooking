@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserAPIServices.Models;
 using UserAPIServices.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -48,6 +49,58 @@ namespace UserAPIServices.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+        [HttpPost]
+        [Route("saveflightbooking")]
+        public ActionResult SaveFlightBooking(FlightBookingModel flightBookingModel)
+        {
+            try
+            {
+                return Ok(_userService.SaveFlightBooking(flightBookingModel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet]
+        [Route("getticketbypnr")]
+        public ActionResult GetTicketByPNR(string pnr, string emailId)
+        {
+            try
+            {
+                return Ok(_userService.GetTicketByPNR(pnr, emailId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet]
+        [Route("gettickethistory")]
+        public ActionResult GetTicketHistory(string emailId)
+        {
+            try
+            {
+                return Ok(_userService.GetTicketHistory(emailId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpDelete]
+        [Route("cancelticket")]
+        public ActionResult CancelTicket (string pnr, string emailId)
+        {
+            try
+            {
+                return Ok(_userService.CancelTicket(pnr, emailId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
