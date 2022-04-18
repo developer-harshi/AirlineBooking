@@ -55,7 +55,7 @@ namespace UserAPIServices.Services
             flightBooking.NonVeg = flightBookingModel.NonVeg;
             flightBooking.NoOfBUSeats = flightBookingModel.NoOfBUSeats;
             flightBooking.NoOfNONBUSeats = flightBookingModel.NoOfNONBUSeats;
-           
+
             flightBooking.Price = flightBookingModel.Price;
             flightBooking.Remarks = flightBookingModel.Remarks;
             flightBooking.SeatNo = flightBookingModel.SeatNo;
@@ -64,6 +64,46 @@ namespace UserAPIServices.Services
             flightBooking.ToLocation = flightBookingModel.ToLocation;
             flightBooking.UserRegistrestionId = flightBookingModel.UserRegistrestionId;
             flightBooking.Veg = flightBookingModel.Veg;
+        }
+        public FlightBooking GetTicketByPNR(string pnr, string emailId)
+        {
+            try
+            {
+                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr && c.MailId == emailId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<FlightBooking> GetTicketHistory(string emailId)
+        {
+            try
+            {
+                return _userContext.FlightBooking.Where(c => c.MailId == emailId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool CancelTicket(string pnr,string emailId)
+        {
+            try
+            {
+                FlightBooking flightBooking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr && c.MailId == emailId).FirstOrDefault();
+                if (flightBooking != null)
+                {
+                    flightBooking.Status = false;
+                    _userContext.FlightBooking.Update(flightBooking);
+                    _userContext.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
