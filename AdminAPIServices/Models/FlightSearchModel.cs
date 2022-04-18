@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AdminAPIServices.Models
+{
+    public class FlightSearchModel
+    {
+        public DateTime? SearchDate { get; set; }
+        public string FromLocation { get; set; }
+        public string ToLocation { get; set; }
+        public DateTime? RoundTripDate { get; set; }
+    }
+}

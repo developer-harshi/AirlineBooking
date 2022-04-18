@@ -51,7 +51,7 @@ namespace AdminAPIServices.Services
             try
             {
                 Airline airline = _adminContext.Airline.Where(c => c.Id == airlineModel.Id).FirstOrDefault();
-                if (airline != null)
+                if (airline == null)
                 {
                     FillAirlineModelToEntity(airlineModel, airline);
                     airlineModel.Id = Guid.NewGuid();
@@ -148,7 +148,7 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-        public List<Flight> SearchFlights()
+        public List<Flight> SearchFlights(FlightSearchModel flightSearchModel)
         {
             try
             {
@@ -158,6 +158,11 @@ namespace AdminAPIServices.Services
             {
                 throw ex;
             }
+        }
+
+        public List<Flight> SearchFlights()
+        {
+            throw new NotImplementedException();
         }
     }
 }
