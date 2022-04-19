@@ -65,11 +65,11 @@ namespace UserAPIServices.Services
             flightBooking.UserRegistrestionId = flightBookingModel.UserRegistrestionId;
             flightBooking.Veg = flightBookingModel.Veg;
         }
-        public FlightBooking GetTicketByPNR(string pnr, string emailId)
+        public FlightBooking GetTicketByPNR(string pnr)
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr && c.MailId == emailId).FirstOrDefault();
+                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr ).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -87,11 +87,11 @@ namespace UserAPIServices.Services
                 throw ex;
             }
         }
-        public bool CancelTicket(string pnr,string emailId)
+        public bool CancelTicket(string pnr)
         {
             try
             {
-                FlightBooking flightBooking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr && c.MailId == emailId).FirstOrDefault();
+                FlightBooking flightBooking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr ).FirstOrDefault();
                 if (flightBooking != null)
                 {
                     flightBooking.Status = false;

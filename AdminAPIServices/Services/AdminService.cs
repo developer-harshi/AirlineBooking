@@ -53,6 +53,11 @@ namespace AdminAPIServices.Services
                 Airline airline = _adminContext.Airline.Where(c => c.Id == airlineModel.Id).FirstOrDefault();
                 if (airline == null)
                 {
+                    if(_adminContext.Airline.Where(c => c.Name.ToLower() == airlineModel.Name.ToLower()).FirstOrDefault()!=null)
+                    {
+                        throw new Exception("Airline name already exist ! .");
+                    }
+                    airline = new Airline();
                     FillAirlineModelToEntity(airlineModel, airline);
                     airlineModel.Id = Guid.NewGuid();
                     airline.Id = airlineModel.Id;
@@ -203,6 +208,10 @@ namespace AdminAPIServices.Services
             try
             {
                 UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email.ToLower() == loginModel.Email.ToLower()).FirstOrDefault();
+                if(userRegistrestion==null)
+                {
+                    throw new Exception("No user exist with this email.Please enter valid email");
+                }
                 if (userRegistrestion != null && userRegistrestion.Password == loginModel.Password)
                 {
 

@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace AdminAPIServices.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v1.0/flight")]    
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -20,40 +21,46 @@ namespace AdminAPIServices.Controllers
         {
             this._adminSrvice = adminService;
         }
-
-        // GET: api/<AdminController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Hello()
         {
-            return new string[] { "value1", "value2" };
+            return "Hello from Admin API Service";
         }
+        #region Commented By me
+        //// GET: api/<AdminController>
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/<AdminController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/<AdminController>/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST api/<AdminController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<AdminController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
-        // PUT api/<AdminController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<AdminController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<AdminController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        [HttpGet]
-        [Route("getallairlines")]
+        //// DELETE api/<AdminController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
+        #endregion Commented By me
+        [HttpGet("getallairlines")]
+        //[Route("getallairlines")]
         public ActionResult GetAllAirlines()
         {
             try
@@ -62,11 +69,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        [Route("getairline")]
+        [HttpGet("getairline")]
+        //[Route("getairline")]
         public ActionResult GetAirline(Guid id)
         {
             try
@@ -75,11 +82,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        [Route("airlineregister")]
+        [HttpPost("airline/register")]
+        //[Route("airline/register")]
         public ActionResult SaveAirline(AirlineModel airlineModel)
         {
             try
@@ -88,11 +95,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        [Route("scheduleflight")]
+        [HttpPost("airline/inventory/add")]
+        //[Route("airline/inventory/add")]
         public ActionResult ScheduleFlight(FlightModel flightModel)
         {
             try
@@ -101,11 +108,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        [Route("getflight")]
+        [HttpGet("getflight")]
+        //[Route("getflight")]
         public ActionResult GetFlight(Guid id)
         {
             try
@@ -114,11 +121,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        [Route("searchflight")]
+        [HttpPost("search")]
+        //[Route("search")]
         public ActionResult SerchFlights(FlightSearchModel flightSearchModel)
         {
             try
@@ -127,11 +134,12 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        [Route("login")]
+        
+        //[Route("admin/login")]
+        [HttpPost("admin/login")]
         public ActionResult UserLogin(LoginModel loginModel)
         {
             try
@@ -140,11 +148,11 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
-        [Route("usersignup")]
+        [HttpPost("usersignup")]
+        //[Route("usersignup")]
         public ActionResult UserSignUp(UserRegistrestionModel userRegistrestionModel)
         {
             try
@@ -153,7 +161,7 @@ namespace AdminAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }

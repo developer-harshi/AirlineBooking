@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/admin",
+      "DownstreamPathTemplate": "/api/v1.0/flight",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 9001
         }
       ],
-      "UpstreamPathTemplate": "/api/admin",
+      "UpstreamPathTemplate": "/api/v1.0/flight",
       "UpstreamHttpMethod": [ "Get" ]
       //,"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "Bearer",
@@ -25,7 +25,7 @@
       //"FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
-      "DownstreamPathTemplate": "/api/admin/{id}",
+      "DownstreamPathTemplate": "/api/v1.0/flight/getallairlines",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -33,7 +33,7 @@
           "Port": 9001
         }
       ],
-      "UpstreamPathTemplate": "/api/admin/{id}",
+      "UpstreamPathTemplate": "/api/v1.0/flight/getallairlines",
       "UpstreamHttpMethod": [ "Get" ]
       //,
       //"AuthenticationOptions": {
@@ -50,7 +50,7 @@
       //"FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
-      "DownstreamPathTemplate": "/api/user",
+      "DownstreamPathTemplate": "/api/v1.0/flight/user",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -58,7 +58,7 @@
           "Port": 9002
         }
       ],
-      "UpstreamPathTemplate": "/api/user",
+      "UpstreamPathTemplate": "/api/v1.0/flight/user",
       "UpstreamHttpMethod": [ "Get" ]
       //,"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "Bearer",

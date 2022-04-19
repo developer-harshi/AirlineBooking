@@ -10,7 +10,7 @@ using UserAPIServices.Services;
 
 namespace UserAPIServices.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1.0/flight")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -19,39 +19,46 @@ namespace UserAPIServices.Controllers
         {
             this._userService = userService;
         }
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("user")]
+        public string Hello()
         {
-            return new string[] { "value1", "value2" };
+            return "Hello from User API Service";
         }
+        #region Commented By me
+        //// GET: api/<UserController>
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/<UserController>/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //// POST api/<UserController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<UserController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        [HttpPost]
-        [Route("saveflightbooking")]
+        //// DELETE api/<UserController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
+        #endregion Commented By me
+        [HttpPost("booking")]
+        //[Route("booking")]
         public ActionResult SaveFlightBooking(FlightBookingModel flightBookingModel)
         {
             try
@@ -60,24 +67,24 @@ namespace UserAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        [Route("getticketbypnr")]
-        public ActionResult GetTicketByPNR(string pnr, string emailId)
+        [HttpGet("ticket/{pnr}")]
+        //[Route("ticket")]
+        public ActionResult GetTicketByPNR(string pnr)
         {
             try
             {
-                return Ok(_userService.GetTicketByPNR(pnr, emailId));
+                return Ok(_userService.GetTicketByPNR(pnr));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        [Route("gettickethistory")]
+        [HttpGet("booking/history/{emailId}")]
+        //[Route("gettickethistory")]
         public ActionResult GetTicketHistory(string emailId)
         {
             try
@@ -86,20 +93,20 @@ namespace UserAPIServices.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpDelete]
-        [Route("cancelticket")]
-        public ActionResult CancelTicket (string pnr, string emailId)
+        [HttpDelete("booking/cancel/{pnr}")]
+        //[Route("cancelticket")]
+        public ActionResult CancelTicket (string pnr)
         {
             try
             {
-                return Ok(_userService.CancelTicket(pnr, emailId));
+                return Ok(_userService.CancelTicket(pnr));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }
