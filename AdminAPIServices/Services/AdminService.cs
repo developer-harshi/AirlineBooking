@@ -97,13 +97,20 @@ namespace AdminAPIServices.Services
                 }
                 else
                 {
+                    flight = new Flight();
                     var checkShedule = _adminContext.Flights.Where(c => c.FlightId == flightModel.FlightId && c.AirlineId == flightModel.AirlineId).FirstOrDefault();
+                    Airline airline = _adminContext.Airline.Where(c => c.Id == flightModel.AirlineId).FirstOrDefault();
+                    if(airline!=null)
+                    {
+                        flightModel.AirlineName = airline.Name;
+                        flight.AirlineName= airline.Name;
+                    }
                     if (checkShedule != null)
                     {
                         throw new Exception("Already some flight exists with flight number in this airline .Please choose unique one");
                     }
 
-                    flight = new Flight();
+                    
                     flight.Id = Guid.NewGuid();
                     flight.Status = true;
                     FillFlightModeltoEntity(flightModel, flight);
@@ -160,11 +167,11 @@ namespace AdminAPIServices.Services
                 FlightSearchResults flightSearchResults = new FlightSearchResults();
                 bool isWeekend = (flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
 
-                flightSearchResults.OnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isWeekend == true ? "Week Ends" : "Week Days") || c.ToDate == flightSearchModel.SearchDate.Value.Date) && c.Status == true).ToList();
+                flightSearchResults.OnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isWeekend == true ? "Week Ends" : "Week Days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation == flightSearchModel.FromLocation && c.ToLocation == flightSearchModel.ToLocation).ToList();
                 if (flightSearchModel.RoundTripDate != null)
                 {
                     bool isReturnDateWeekend = (flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
-                    flightSearchResults.ReturnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isReturnDateWeekend == true ? "Week Ends" : "Week Days") || c.ToDate == flightSearchModel.SearchDate.Value.Date) && c.Status == true).ToList();
+                    flightSearchResults.ReturnDateResults = _adminContext.Flights.Where(c => (c.Sheduled == "Daily" || c.Sheduled == (isReturnDateWeekend == true ? "Week Ends" : "Week Days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation==flightSearchModel.ToLocation && c.ToLocation==flightSearchModel.FromLocation).ToList();
                 }
                 return flightSearchResults;
             }

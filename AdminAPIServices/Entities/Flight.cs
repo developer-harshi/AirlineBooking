@@ -52,5 +52,8 @@ namespace AdminAPIServices.Entities
         public string Sheduled { get; set; }/*VARCHAR(50)             null,--Daily ,Weekly ,EveryDay,Weekend,WeekDays*/
         [Column("Status")]
         public bool Status { get; set; }/*bit                     null,*/
+        [StringLength(500)]
+        public string AirlineName { get; set; }
     }
 }
+//Alter table Flights Add AirlineName NVARCHAR(500) null
