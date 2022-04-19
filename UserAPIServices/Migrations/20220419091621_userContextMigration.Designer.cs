@@ -10,7 +10,7 @@ using UserAPIServices.Context;
 namespace UserAPIServices.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20220416132745_userContextMigration")]
+    [Migration("20220419091621_userContextMigration")]
     partial class userContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,6 +245,11 @@ namespace UserAPIServices.Migrations
                         .HasColumnName("Name")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
+
+                    b.Property<string>("Password")
+                        .HasColumnName("Password")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Role")
                         .HasColumnName("Role")

@@ -244,6 +244,11 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<string>("Password")
+                        .HasColumnName("Password")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<string>("Role")
                         .HasColumnName("Role")
                         .HasColumnType("nvarchar(100)")

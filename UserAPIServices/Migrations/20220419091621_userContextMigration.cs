@@ -31,7 +31,8 @@ namespace UserAPIServices.Migrations
                     Mobile = table.Column<string>(maxLength: 500, nullable: true),
                     Email = table.Column<string>(maxLength: 500, nullable: true),
                     Role = table.Column<string>(maxLength: 100, nullable: true),
-                    Status = table.Column<bool>(nullable: false)
+                    Status = table.Column<bool>(nullable: false),
+                    Password = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
