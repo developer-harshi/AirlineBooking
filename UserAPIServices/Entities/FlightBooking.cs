@@ -44,7 +44,8 @@ namespace UserAPIServices.Entities
         [StringLength(500)]
         public string Remarks { get; set; }//VARCHAR(500)            null, 
         [Column("SeatNo")]
-        public int SeatNo { get; set; }                //  null, 
+        [StringLength(500)]
+        public string SeatNo { get; set; }                //  null, 
         //[Column("Price")]
         [Column(TypeName = "decimal(16,2)")]
         public decimal Price { get; set; }//money                   null,
@@ -64,3 +65,4 @@ namespace UserAPIServices.Entities
         public bool Status { get; set; }//bit                     null,
     }
 }
+//Alter table FlightBooking alter column  seatno NVARCHAR(500) null

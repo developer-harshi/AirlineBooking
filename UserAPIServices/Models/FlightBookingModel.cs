@@ -36,7 +36,7 @@ namespace UserAPIServices.Models
 
         public string Remarks { get; set; }//VARCHAR(500)            null, 
 
-        public int SeatNo { get; set; }                //  null, 
+        public string SeatNo { get; set; }                //  null, 
                                                        //[Column("Price")]
 
         public decimal Price { get; set; }//money                   null,

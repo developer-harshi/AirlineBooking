@@ -23,6 +23,7 @@ namespace UserAPIServices.Services
                 if (flightBooking != null)
                 {
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
+                    _userContext.FlightBooking.Update(flightBooking);
                 }
                 else
                 {
@@ -32,8 +33,10 @@ namespace UserAPIServices.Services
                     flightBookingModel.Id = flightBooking.Id;
                     flightBooking.PNRNumber = DateTime.UtcNow.Day.ToString() + DateTime.UtcNow.Month.ToString() + "-" + DateTime.UtcNow.Year.ToString() + DateTime.UtcNow.Hour.ToString() + DateTime.UtcNow.Minute.ToString() + DateTime.UtcNow.Millisecond.ToString();
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
+                    _userContext.FlightBooking.Add(flightBooking);
 
                 }
+                _userContext.SaveChanges();
                 return flightBookingModel;
             }
             catch(Exception ex)
@@ -80,7 +83,7 @@ namespace UserAPIServices.Services
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.MailId == emailId).ToList();
+                return _userContext.FlightBooking.Where(c => c.MailId.ToLower() == emailId.ToLower()).ToList();
             }
             catch (Exception ex)
             {
