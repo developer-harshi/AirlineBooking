@@ -131,7 +131,7 @@ namespace AdminAPIServices.Controllers
             }
         }
         [HttpPost]
-        [Route("userlogin")]
+        [Route("login")]
         public ActionResult UserLogin(LoginModel loginModel)
         {
             try
@@ -144,7 +144,7 @@ namespace AdminAPIServices.Controllers
             }
         }
         [HttpPost]
-        [Route("usersignup")]
+        [Route("register")]
         public ActionResult UserSignUp(UserRegistrestionModel userRegistrestionModel)
         {
             try
