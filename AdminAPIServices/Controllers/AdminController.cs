@@ -144,7 +144,7 @@ namespace AdminAPIServices.Controllers
             }
         }
         [HttpPost]
-        [Route("register")]
+        [Route("usersignup")]
         public ActionResult UserSignUp(UserRegistrestionModel userRegistrestionModel)
         {
             try
