@@ -14,5 +14,6 @@ namespace UserAPIServices.Services
         List<FlightBooking> GetTicketHistory(string emailId);
         bool CancelTicket(string pnr);
         FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
+        FlightBookingModel CreateFlightBookingModel(Guid id);
     }
 }

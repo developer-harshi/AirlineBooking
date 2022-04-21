@@ -128,5 +128,64 @@ namespace UserAPIServices.Services
                 throw ex;
             }
         }
+
+        public FlightBookingModel CreateFlightBookingModel(Guid id)
+        {
+            FlightBookingModel flightBookingModel = new FlightBookingModel();
+            List<BookingPersonsModel> bookingPersonsModel = new List<BookingPersonsModel>();
+            var flightBooking = _userContext.FlightBooking.Where(c => c.Id == id).AsQueryable();
+            if(flightBooking!=null&& flightBooking.Count()>0)
+            {
+               FlightBooking flightBooking1 = flightBooking.FirstOrDefault();
+                List<BookingPersons> lstBookingPersons = flightBooking1.BookingPersons.ToList();
+                flightBookingModel.AirlineId = flightBooking1.AirlineId;
+                flightBookingModel.ContactNumber = flightBooking1.ContactNumber;
+                flightBookingModel.FlightId = flightBooking1.FlightId;
+                flightBookingModel.FlightNumber = flightBooking1.FlightNumber;
+                flightBookingModel.FromDate = flightBooking1.FromDate;
+                flightBookingModel.FromLocation = flightBooking1.FromLocation;
+                flightBookingModel.Id = flightBooking1.Id;
+                flightBookingModel.NoOfBUSeats = flightBooking1.NoOfBUSeats;
+                flightBookingModel.NoOfNONBUSeats = flightBooking1.NoOfNONBUSeats;
+                flightBookingModel.PNRNumber = flightBooking1.PNRNumber;
+                flightBookingModel.RegisteredMailId = flightBooking1.RegisteredMailId;
+                flightBookingModel.Remarks = flightBooking1.Remarks;
+                flightBookingModel.SeatNos = flightBooking1.SeatNos;
+                flightBookingModel.Status = flightBooking1.Status;
+                flightBookingModel.ToDate = flightBooking1.ToDate;
+                flightBookingModel.ToLocation = flightBooking1.ToLocation;
+                flightBookingModel.TotalPrice = flightBooking1.TotalPrice;
+                flightBookingModel.UserRegistrestionId = flightBooking1.UserRegistrestionId;
+                if (lstBookingPersons != null && lstBookingPersons.Count() > 0)
+                {
+                    foreach (var bookingPerson in lstBookingPersons)
+                    {
+                        BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
+                        bookingPersonModel.Age = bookingPerson.Age;
+                        bookingPersonModel.ContactNumber = bookingPerson.ContactNumber;
+                        bookingPersonModel.DOB = bookingPerson.DOB;
+                        bookingPersonModel.Email = bookingPerson.Email;
+                        bookingPersonModel.FlightBookingId = bookingPerson.FlightBookingId;
+                        bookingPersonModel.Gender = bookingPerson.Gender;
+                        bookingPersonModel.Id = bookingPerson.Id;
+                        bookingPersonModel.Name = bookingPerson.Name;
+                        bookingPersonModel.NonVeg = bookingPerson.NonVeg;
+                        bookingPersonModel.Price = bookingPerson.Price;
+                        bookingPersonModel.SeatNo = bookingPerson.SeatNo;
+                        bookingPersonModel.Veg = bookingPerson.Veg;
+                        bookingPersonsModel.Add(bookingPersonModel);
+                    }
+                }
+                flightBookingModel.BookingPersonsModel = bookingPersonsModel;
+
+            }
+            else
+            {
+                BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
+                bookingPersonsModel.Add(bookingPersonModel);
+                flightBookingModel.BookingPersonsModel = bookingPersonsModel;
+            }
+            return flightBookingModel;
+        }
     }
 }

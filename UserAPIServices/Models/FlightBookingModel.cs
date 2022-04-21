@@ -61,6 +61,6 @@ namespace UserAPIServices.Models
         [Column("Status")]
         public bool Status { get; set; }//bit                     null,
         public string SeatNos { get; set; }
-        public List<BookingPersonsModel> bookingPersonsModel { get; set; }
+        public List<BookingPersonsModel> BookingPersonsModel { get; set; }
     }
 }

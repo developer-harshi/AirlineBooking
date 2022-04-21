@@ -62,6 +62,7 @@ namespace UserAPIServices.Entities
         [Column("Status")]
         public bool Status { get; set; }//bit                     null,
         public string SeatNos { get; set; }
+        public ICollection<BookingPersons> BookingPersons { get; set; }
     }
 }
 //Alter table FlightBooking alter column  seatno NVARCHAR(500) null
