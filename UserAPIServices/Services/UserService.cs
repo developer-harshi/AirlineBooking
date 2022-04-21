@@ -195,12 +195,12 @@ namespace UserAPIServices.Services
             {
                 //BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
                 BookingPersons bookingPerson = new BookingPersons();
-                bookingPerson.Id = bookingPersonModel.Id;
+                bookingPerson.Id =Guid.NewGuid();
                 bookingPerson.Age = bookingPersonModel.Age;
                 bookingPerson.ContactNumber = bookingPersonModel.ContactNumber;
                 bookingPerson.DOB = bookingPersonModel.DOB;
                 bookingPerson.Email = bookingPersonModel.Email;
-                bookingPerson.FlightBookingId = bookingPersonModel.FlightBookingId;
+                bookingPerson.FlightBookingId = flightBookingModel.Id;
                 bookingPerson.Gender = bookingPersonModel.Gender;
 
                 bookingPerson.Name = bookingPersonModel.Name;
