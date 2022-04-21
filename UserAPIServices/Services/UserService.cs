@@ -8,7 +8,7 @@ using UserAPIServices.Models;
 
 namespace UserAPIServices.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly UserContext _userContext;
         public UserService(UserContext userContext)
@@ -23,6 +23,7 @@ namespace UserAPIServices.Services
                 if (flightBooking != null)
                 {
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
+
                     _userContext.FlightBooking.Update(flightBooking);
                 }
                 else
@@ -34,12 +35,13 @@ namespace UserAPIServices.Services
                     flightBooking.PNRNumber = DateTime.UtcNow.Day.ToString() + DateTime.UtcNow.Month.ToString() + "-" + DateTime.UtcNow.Year.ToString() + DateTime.UtcNow.Hour.ToString() + DateTime.UtcNow.Minute.ToString() + DateTime.UtcNow.Millisecond.ToString();
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
                     _userContext.FlightBooking.Add(flightBooking);
+                    FillBookingPersonsModeltoEntity(flightBookingModel,true);
 
                 }
                 _userContext.SaveChanges();
                 return flightBookingModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -72,7 +74,7 @@ namespace UserAPIServices.Services
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr ).FirstOrDefault();
+                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -134,9 +136,9 @@ namespace UserAPIServices.Services
             FlightBookingModel flightBookingModel = new FlightBookingModel();
             List<BookingPersonsModel> bookingPersonsModel = new List<BookingPersonsModel>();
             var flightBooking = _userContext.FlightBooking.Where(c => c.Id == id).AsQueryable();
-            if(flightBooking!=null&& flightBooking.Count()>0)
+            if (flightBooking != null && flightBooking.Count() > 0)
             {
-               FlightBooking flightBooking1 = flightBooking.FirstOrDefault();
+                FlightBooking flightBooking1 = flightBooking.FirstOrDefault();
                 List<BookingPersons> lstBookingPersons = flightBooking1.BookingPersons.ToList();
                 flightBookingModel.AirlineId = flightBooking1.AirlineId;
                 flightBookingModel.ContactNumber = flightBooking1.ContactNumber;
@@ -186,6 +188,30 @@ namespace UserAPIServices.Services
                 flightBookingModel.BookingPersonsModel = bookingPersonsModel;
             }
             return flightBookingModel;
+        }
+        public void FillBookingPersonsModeltoEntity(FlightBookingModel flightBookingModel, bool isAdd)
+        {
+            foreach (var bookingPersonModel in flightBookingModel.BookingPersonsModel)
+            {
+                //BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
+                BookingPersons bookingPerson = new BookingPersons();
+                bookingPerson.Id = bookingPersonModel.Id;
+                bookingPerson.Age = bookingPersonModel.Age;
+                bookingPerson.ContactNumber = bookingPersonModel.ContactNumber;
+                bookingPerson.DOB = bookingPersonModel.DOB;
+                bookingPerson.Email = bookingPersonModel.Email;
+                bookingPerson.FlightBookingId = bookingPersonModel.FlightBookingId;
+                bookingPerson.Gender = bookingPersonModel.Gender;
+
+                bookingPerson.Name = bookingPersonModel.Name;
+                bookingPerson.NonVeg = bookingPersonModel.NonVeg;
+                bookingPerson.Price = bookingPersonModel.Price;
+                bookingPerson.SeatNo = bookingPersonModel.SeatNo;
+                bookingPerson.Veg = bookingPersonModel.Veg;
+                _userContext.BookingPersons.Add(bookingPerson);
+
+
+            }
         }
     }
 }
