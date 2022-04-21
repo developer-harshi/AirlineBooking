@@ -50,6 +50,60 @@ namespace UserAPIServices.Migrations
                     b.ToTable("Airline");
                 });
 
+            modelBuilder.Entity("UserAPIServices.Entities.BookingPersons", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime?>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<Guid?>("FlightBookingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("NonVeg")
+                        .HasColumnName("NonVeg")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<int>("SeatNo")
+                        .HasColumnName("SeatNo")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Veg")
+                        .HasColumnName("Veg")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightBookingId");
+
+                    b.ToTable("BookingPersons");
+                });
+
             modelBuilder.Entity("UserAPIServices.Entities.Flight", b =>
                 {
                     b.Property<Guid>("Id")
@@ -59,6 +113,10 @@ namespace UserAPIServices.Migrations
 
                     b.Property<Guid?>("AirlineId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AirlineName")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("FlightId")
                         .HasColumnName("FlightId")
@@ -157,11 +215,6 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<string>("MailId")
-                        .HasColumnName("MailId")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<int>("NoOfBUSeats")
                         .HasColumnName("NoOfBUSeats")
                         .HasColumnType("int");
@@ -170,26 +223,23 @@ namespace UserAPIServices.Migrations
                         .HasColumnName("NoOfNONBUSeats")
                         .HasColumnType("int");
 
-                    b.Property<bool>("NonVeg")
-                        .HasColumnName("NonVeg")
-                        .HasColumnType("bit");
-
                     b.Property<string>("PNRNumber")
                         .HasColumnName("PNRNumber")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(16,2)");
+                    b.Property<string>("RegisteredMailId")
+                        .HasColumnName("MailId")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Remarks")
                         .HasColumnName("Remarks")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int>("SeatNo")
-                        .HasColumnName("SeatNo")
-                        .HasColumnType("int");
+                    b.Property<string>("SeatNos")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnName("Status")
@@ -204,20 +254,20 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<string>("UserRegistrestionId")
-                        .HasColumnName("UserRegistrestionId")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(16,2)");
 
-                    b.Property<bool>("Veg")
-                        .HasColumnName("Veg")
-                        .HasColumnType("bit");
+                    b.Property<Guid?>("UserRegistrestionId")
+                        .HasColumnName("UserRegistrestionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AirlineId");
 
                     b.HasIndex("FlightId");
+
+                    b.HasIndex("UserRegistrestionId");
 
                     b.ToTable("FlightBooking");
                 });
@@ -263,6 +313,13 @@ namespace UserAPIServices.Migrations
                     b.ToTable("UserRegistrestion");
                 });
 
+            modelBuilder.Entity("UserAPIServices.Entities.BookingPersons", b =>
+                {
+                    b.HasOne("UserAPIServices.Entities.FlightBooking", "FlightBooking")
+                        .WithMany()
+                        .HasForeignKey("FlightBookingId");
+                });
+
             modelBuilder.Entity("UserAPIServices.Entities.Flight", b =>
                 {
                     b.HasOne("UserAPIServices.Entities.Airline", "Airline")
@@ -277,8 +334,12 @@ namespace UserAPIServices.Migrations
                         .HasForeignKey("AirlineId");
 
                     b.HasOne("UserAPIServices.Entities.Flight", "Flight")
-                        .WithMany("FlightBookings")
+                        .WithMany()
                         .HasForeignKey("FlightId");
+
+                    b.HasOne("UserAPIServices.Entities.UserRegistrestion", "UserRegistrestion")
+                        .WithMany()
+                        .HasForeignKey("UserRegistrestionId");
                 });
 #pragma warning restore 612, 618
         }

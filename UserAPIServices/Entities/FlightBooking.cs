@@ -32,10 +32,7 @@ namespace UserAPIServices.Entities
         [Column("ToLocation")]
         [StringLength(500)]
         public string ToLocation { get; set; }//VARCHAR(500)            null, 
-        [Column("Veg")]
-        public bool Veg { get; set; }//Bit                     null,
-        [Column("NonVeg")]
-        public bool NonVeg { get; set; }            //bit                     null, 
+                //bit                     null, 
         [Column("NoOfBUSeats")]
         public int NoOfBUSeats { get; set; }              //     null, 
         [Column("NoOfNONBUSeats")]
@@ -43,26 +40,28 @@ namespace UserAPIServices.Entities
         [Column("Remarks")]
         [StringLength(500)]
         public string Remarks { get; set; }//VARCHAR(500)            null, 
-        [Column("SeatNo")]
-        [StringLength(500)]
-        public string SeatNo { get; set; }                //  null, 
+        
+                  //  null, 
         //[Column("Price")]
         [Column(TypeName = "decimal(16,2)")]
-        public decimal Price { get; set; }//money                   null,
+        public decimal TotalPrice { get; set; }//money                   null,
         [Column("PNRNumber")]
         [StringLength(500)]
         public string PNRNumber { get; set; }        // varchar(300)            null, 
         [Column("MailId")]
         [StringLength(500)]
-        public string MailId { get; set; }//varchar(300)            null, 
+        public string RegisteredMailId { get; set; }//varchar(300)            null, 
         [Column("ContactNumber")]
         [StringLength(500)]
         public string ContactNumber { get; set; }//varchar(300)            null, 
+
+        public UserRegistrestion UserRegistrestion { get; set; }
         [Column("UserRegistrestionId")]
-        [StringLength(500)]
-        public string UserRegistrestionId { get; set; }//uniqueIdentifier        null 
+        //[StringLength(500)]
+        public Guid? UserRegistrestionId { get; set; }//uniqueIdentifier        null 
         [Column("Status")]
         public bool Status { get; set; }//bit                     null,
+        public string SeatNos { get; set; }
     }
 }
 //Alter table FlightBooking alter column  seatno NVARCHAR(500) null

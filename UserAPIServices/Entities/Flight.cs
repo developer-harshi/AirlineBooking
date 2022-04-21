@@ -52,6 +52,7 @@ namespace UserAPIServices.Entities
         public string Sheduled { get; set; }/*VARCHAR(50)             null,--Daily ,Weekly ,EveryDay,Weekend,WeekDays*/
         [Column("Status")]
         public bool Status { get; set; }/*bit                     null,*/
-        public ICollection<FlightBooking> FlightBookings { get; set; }
+        [StringLength(500)]
+        public string AirlineName { get; set; }
     }
 }

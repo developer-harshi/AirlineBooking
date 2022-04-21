@@ -13,5 +13,6 @@ namespace UserAPIServices.Services
         FlightBooking GetTicketByPNR(string pnr);
         List<FlightBooking> GetTicketHistory(string emailId);
         bool CancelTicket(string pnr);
+        FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
     }
 }

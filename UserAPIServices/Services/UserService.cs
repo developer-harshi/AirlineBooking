@@ -54,19 +54,19 @@ namespace UserAPIServices.Services
             flightBooking.FromDate = flightBookingModel.FromDate;
             flightBooking.FromLocation = flightBookingModel.FromLocation;
 
-            flightBooking.MailId = flightBookingModel.MailId;
-            flightBooking.NonVeg = flightBookingModel.NonVeg;
+            flightBooking.RegisteredMailId = flightBookingModel.RegisteredMailId;
+            //flightBooking.NonVeg = flightBookingModel.NonVeg;
             flightBooking.NoOfBUSeats = flightBookingModel.NoOfBUSeats;
             flightBooking.NoOfNONBUSeats = flightBookingModel.NoOfNONBUSeats;
 
-            flightBooking.Price = flightBookingModel.Price;
+            flightBooking.TotalPrice = flightBookingModel.TotalPrice;
             flightBooking.Remarks = flightBookingModel.Remarks;
-            flightBooking.SeatNo = flightBookingModel.SeatNo;
+            flightBooking.SeatNos = flightBookingModel.SeatNos;
 
             flightBooking.ToDate = flightBookingModel.ToDate;
             flightBooking.ToLocation = flightBookingModel.ToLocation;
             flightBooking.UserRegistrestionId = flightBookingModel.UserRegistrestionId;
-            flightBooking.Veg = flightBookingModel.Veg;
+            //flightBooking.Veg = flightBookingModel.Veg;
         }
         public FlightBooking GetTicketByPNR(string pnr)
         {
@@ -83,7 +83,7 @@ namespace UserAPIServices.Services
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.MailId.ToLower() == emailId.ToLower()).ToList();
+                return _userContext.FlightBooking.Where(c => c.RegisteredMailId.ToLower() == emailId.ToLower()).ToList();
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace UserAPIServices.Services
         {
             try
             {
-                FlightBooking flightBooking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr ).FirstOrDefault();
+                FlightBooking flightBooking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr).FirstOrDefault();
                 if (flightBooking != null)
                 {
                     flightBooking.Status = false;
@@ -102,6 +102,26 @@ namespace UserAPIServices.Services
                     _userContext.SaveChanges();
                 }
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel)
+        {
+            try
+            {
+                FlightSearchResults flightSearchResults = new FlightSearchResults();
+                bool isWeekend = (flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
+
+                flightSearchResults.OnDateResults = _userContext.Flights.Where(c => (c.Sheduled.ToLower() == "daily" || c.Sheduled.ToLower() == (isWeekend == true ? "week ends" : "week days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation.ToLower() == flightSearchModel.FromLocation.ToLower() && c.ToLocation.ToLower() == flightSearchModel.ToLocation.ToLower()).ToList();
+                if (flightSearchModel.RoundTripDate != null)
+                {
+                    bool isReturnDateWeekend = (flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
+                    flightSearchResults.ReturnDateResults = _userContext.Flights.Where(c => (c.Sheduled.ToLower() == "daily" || c.Sheduled.ToLower() == (isReturnDateWeekend == true ? "week ends" : "week days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation.ToLower() == flightSearchModel.ToLocation.ToLower() && c.ToLocation.ToLower() == flightSearchModel.FromLocation.ToLower()).ToList();
+                }
+                return flightSearchResults;
             }
             catch (Exception ex)
             {

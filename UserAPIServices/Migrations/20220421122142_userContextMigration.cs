@@ -58,7 +58,8 @@ namespace UserAPIServices.Migrations
                     NoOfRows = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
                     Sheduled = table.Column<string>(maxLength: 500, nullable: true),
-                    Status = table.Column<bool>(nullable: false)
+                    Status = table.Column<bool>(nullable: false),
+                    AirlineName = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,18 +84,16 @@ namespace UserAPIServices.Migrations
                     ToDate = table.Column<DateTime>(nullable: false),
                     FromLocation = table.Column<string>(maxLength: 500, nullable: true),
                     ToLocation = table.Column<string>(maxLength: 500, nullable: true),
-                    Veg = table.Column<bool>(nullable: false),
-                    NonVeg = table.Column<bool>(nullable: false),
                     NoOfBUSeats = table.Column<int>(nullable: false),
                     NoOfNONBUSeats = table.Column<int>(nullable: false),
                     Remarks = table.Column<string>(maxLength: 500, nullable: true),
-                    SeatNo = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
                     PNRNumber = table.Column<string>(maxLength: 500, nullable: true),
                     MailId = table.Column<string>(maxLength: 500, nullable: true),
                     ContactNumber = table.Column<string>(maxLength: 500, nullable: true),
-                    UserRegistrestionId = table.Column<string>(maxLength: 500, nullable: true),
-                    Status = table.Column<bool>(nullable: false)
+                    UserRegistrestionId = table.Column<Guid>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    SeatNos = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,7 +110,46 @@ namespace UserAPIServices.Migrations
                         principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FlightBooking_UserRegistrestion_UserRegistrestionId",
+                        column: x => x.UserRegistrestionId,
+                        principalTable: "UserRegistrestion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "BookingPersons",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    FlightBookingId = table.Column<Guid>(nullable: true),
+                    Veg = table.Column<bool>(nullable: false),
+                    NonVeg = table.Column<bool>(nullable: false),
+                    SeatNo = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    Name = table.Column<string>(maxLength: 500, nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    DOB = table.Column<DateTime>(nullable: true),
+                    Gender = table.Column<string>(maxLength: 50, nullable: true),
+                    Email = table.Column<string>(maxLength: 50, nullable: true),
+                    ContactNumber = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingPersons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookingPersons_FlightBooking_FlightBookingId",
+                        column: x => x.FlightBookingId,
+                        principalTable: "FlightBooking",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingPersons_FlightBookingId",
+                table: "BookingPersons",
+                column: "FlightBookingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FlightBooking_AirlineId",
@@ -124,6 +162,11 @@ namespace UserAPIServices.Migrations
                 column: "FlightId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FlightBooking_UserRegistrestionId",
+                table: "FlightBooking",
+                column: "UserRegistrestionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Flights_AirlineId",
                 table: "Flights",
                 column: "AirlineId");
@@ -132,13 +175,16 @@ namespace UserAPIServices.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BookingPersons");
+
+            migrationBuilder.DropTable(
                 name: "FlightBooking");
 
             migrationBuilder.DropTable(
-                name: "UserRegistrestion");
+                name: "Flights");
 
             migrationBuilder.DropTable(
-                name: "Flights");
+                name: "UserRegistrestion");
 
             migrationBuilder.DropTable(
                 name: "Airline");

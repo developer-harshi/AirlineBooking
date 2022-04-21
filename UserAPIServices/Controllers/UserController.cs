@@ -98,7 +98,7 @@ namespace UserAPIServices.Controllers
         }
         [HttpDelete("booking/cancel/{pnr}")]
         //[Route("cancelticket")]
-        public ActionResult CancelTicket (string pnr)
+        public ActionResult CancelTicket(string pnr)
         {
             try
             {
@@ -109,5 +109,19 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("search")]
+        //[Route("search")]
+        public ActionResult SerchFlights(FlightSearchModel flightSearchModel)
+        {
+            try
+            {
+                return Ok(_userService.SearchFlights(flightSearchModel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

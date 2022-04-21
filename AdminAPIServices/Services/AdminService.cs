@@ -160,26 +160,7 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-        public FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel)
-        {
-            try
-            {
-                FlightSearchResults flightSearchResults = new FlightSearchResults();
-                bool isWeekend = (flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.SearchDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
-
-                flightSearchResults.OnDateResults = _adminContext.Flights.Where(c => (c.Sheduled.ToLower() == "daily" || c.Sheduled.ToLower() == (isWeekend == true ? "week ends" : "week days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation.ToLower() == flightSearchModel.FromLocation.ToLower() && c.ToLocation.ToLower() == flightSearchModel.ToLocation.ToLower()).ToList();
-                if (flightSearchModel.RoundTripDate != null)
-                {
-                    bool isReturnDateWeekend = (flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "saturday" || flightSearchModel.RoundTripDate.Value.DayOfWeek.ToString().ToLower() == "sunday") ? true : false;
-                    flightSearchResults.ReturnDateResults = _adminContext.Flights.Where(c => (c.Sheduled.ToLower() == "daily" || c.Sheduled.ToLower() == (isReturnDateWeekend == true ? "week ends" : "week days") || c.ToDate.Value.Date == flightSearchModel.SearchDate.Value.Date) && c.Status == true && c.FromLocation.ToLower()==flightSearchModel.ToLocation.ToLower() && c.ToLocation.ToLower()==flightSearchModel.FromLocation.ToLower()).ToList();
-                }
-                return flightSearchResults;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
         public UserRegistrestionModel UserSignUp(UserRegistrestionModel userRegistrestionModel)
         {
             try
