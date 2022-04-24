@@ -1,5 +1,7 @@
-﻿using AdminAPIServices.Models;
+﻿using AdminAPIServices.Authentication;
+using AdminAPIServices.Models;
 using AdminAPIServices.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,14 +14,17 @@ using System.Threading.Tasks;
 namespace AdminAPIServices.Controllers
 {
     //[Route("api/[controller]")]
+    [Authorize]
     [Route("api/v1.0/flight")]    
     [ApiController]
     public class AdminController : ControllerBase
     {
         public readonly IAdminService _adminSrvice;
-        public AdminController(IAdminService adminService)
+        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        public AdminController(IAdminService adminService,IJwtAuthenticationManager jwtAuthenticationManager)
         {
             this._adminSrvice = adminService;
+            this._jwtAuthenticationManager = jwtAuthenticationManager;
         }
         [HttpGet]
         public string Hello()
@@ -59,6 +64,25 @@ namespace AdminAPIServices.Controllers
         //{
         //}
         #endregion Commented By me
+
+        [AllowAnonymous]
+        [HttpGet("Authenticate")]
+        public IActionResult GetAuthentication(string username,string password)
+        {
+            var token = _jwtAuthenticationManager.Authenticate(username, password);
+            if(token==null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(token);
+            }
+        }
+
+
+
+
         [HttpGet("getallairlines")]
         //[Route("getallairlines")]
         public ActionResult GetAllAirlines()

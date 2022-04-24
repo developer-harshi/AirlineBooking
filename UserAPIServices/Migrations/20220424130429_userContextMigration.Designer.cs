@@ -10,7 +10,7 @@ using UserAPIServices.Context;
 namespace UserAPIServices.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20220421122142_userContextMigration")]
+    [Migration("20220424130429_userContextMigration")]
     partial class userContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -318,7 +318,7 @@ namespace UserAPIServices.Migrations
             modelBuilder.Entity("UserAPIServices.Entities.BookingPersons", b =>
                 {
                     b.HasOne("UserAPIServices.Entities.FlightBooking", "FlightBooking")
-                        .WithMany()
+                        .WithMany("BookingPersons")
                         .HasForeignKey("FlightBookingId");
                 });
 

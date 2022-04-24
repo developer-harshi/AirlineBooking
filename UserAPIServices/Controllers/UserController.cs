@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserAPIServices.Authentication;
 using UserAPIServices.Models;
 using UserAPIServices.Services;
 
@@ -10,19 +12,37 @@ using UserAPIServices.Services;
 
 namespace UserAPIServices.Controllers
 {
+    [Authorize]
     [Route("api/v1.0/flight")]
     [ApiController]
     public class UserController : ControllerBase
     {
         public readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        public UserController(IUserService userService, IJwtAuthenticationManager jwtAuthenticationManager)
         {
             this._userService = userService;
+            this._jwtAuthenticationManager = jwtAuthenticationManager;
         }
+        [AllowAnonymous]
         [HttpGet("user")]
         public string Hello()
         {
             return "Hello from User API Service";
+        }
+        [AllowAnonymous]
+        [HttpGet("Authenticate")]
+        public IActionResult GetAuthentication(string username, string password)
+        {
+            var token = _jwtAuthenticationManager.Authenticate(username, password);
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(token);
+            }
         }
         #region Commented By me
         //// GET: api/<UserController>

@@ -316,7 +316,7 @@ namespace UserAPIServices.Migrations
             modelBuilder.Entity("UserAPIServices.Entities.BookingPersons", b =>
                 {
                     b.HasOne("UserAPIServices.Entities.FlightBooking", "FlightBooking")
-                        .WithMany()
+                        .WithMany("BookingPersons")
                         .HasForeignKey("FlightBookingId");
                 });
 

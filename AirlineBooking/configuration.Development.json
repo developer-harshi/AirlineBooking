@@ -10,11 +10,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight",
-      "UpstreamHttpMethod": [ "Get" ]
-      //,"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+      //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -34,12 +35,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getallairlines",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -60,12 +61,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/airline/register",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -85,12 +86,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/airline/inventory/add",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -110,12 +111,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/search",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -135,12 +136,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/admin/login",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -160,11 +161,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/user",
-      "UpstreamHttpMethod": [ "Get" ]
-      //,"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+      //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -184,12 +186,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/ticket/{pnr}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -209,12 +211,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -234,12 +236,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking/history/{emailId}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -259,12 +261,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking/cancel/{pnr}",
-      "UpstreamHttpMethod": [ "Delete" ]
+      "UpstreamHttpMethod": [ "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
       //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer",
-      //  "AllowedScopes": []
-      //},
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
