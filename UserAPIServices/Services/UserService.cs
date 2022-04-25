@@ -70,22 +70,102 @@ namespace UserAPIServices.Services
             flightBooking.UserRegistrestionId = flightBookingModel.UserRegistrestionId;
             //flightBooking.Veg = flightBookingModel.Veg;
         }
-        public FlightBooking GetTicketByPNR(string pnr)
+        public TicketSearchModel GetTicketByPNR(string pnr)
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.PNRNumber == pnr).FirstOrDefault();
+                TicketSearchModel ticketSearchModel = new TicketSearchModel();
+                List<Persons> lstPersons = new List<Persons>();
+                var booking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr).FirstOrDefault();
+                if (booking != null)
+                {
+                    var persons = _userContext.BookingPersons.Where(c => c.FlightBookingId == booking.Id).ToList();
+                    if (persons != null)
+                    {
+                        FillTicketSearchModel(ticketSearchModel, booking);
+                        if (persons != null && persons.Count() > 0)
+                        {
+                            FillPersons(lstPersons, persons);
+                        }
+                        ticketSearchModel.Persons = lstPersons;
+
+                    }
+                }
+                return ticketSearchModel;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public List<FlightBooking> GetTicketHistory(string emailId)
+
+        private static void FillPersons(List<Persons> lstPersons, List<BookingPersons> persons)
+        {
+            foreach (var bookingPerson in persons)
+            {
+                Persons bookingPersonModel = new Persons();
+                bookingPersonModel.Age = bookingPerson.Age;
+                //bookingPersonModel.ContactNumber = bookingPerson.ContactNumber;
+                //bookingPersonModel.DOB = bookingPerson.DOB;
+                //bookingPersonModel.Email = bookingPerson.Email;
+                //bookingPersonModel.FlightBookingId = bookingPerson.FlightBookingId;
+                bookingPersonModel.Gender = bookingPerson.Gender;
+                bookingPersonModel.Id = bookingPerson.Id;
+                bookingPersonModel.FirstName = bookingPerson.Name;
+                //bookingPersonModel.NonVeg = bookingPerson.NonVeg;
+                //bookingPersonModel.Price = bookingPerson.Price;
+                bookingPersonModel.SeatNo = bookingPerson.SeatNo;
+                //bookingPersonModel.Veg = bookingPerson.Veg;
+                lstPersons.Add(bookingPersonModel);
+            }
+        }
+
+        private static void FillTicketSearchModel(TicketSearchModel ticketSearchModel, FlightBooking booking)
+        {
+            //ticketSearchModel.AirlineId = booking.AirlineId;
+            ticketSearchModel.ContactNumber = booking.ContactNumber;
+            //ticketSearchModel.FlightId = booking.FlightId;
+            ticketSearchModel.FlightNumber = booking.FlightNumber;
+            ticketSearchModel.FromDate = booking.FromDate;
+            ticketSearchModel.FromLocation = booking.FromLocation;
+            ticketSearchModel.Id = booking.Id;
+            //ticketSearchModel.NoOfBUSeats = booking.NoOfBUSeats;
+            //ticketSearchModel.NoOfNONBUSeats = booking.NoOfNONBUSeats;
+            ticketSearchModel.PNRNumber = booking.PNRNumber;
+            ticketSearchModel.RegisteredMailId = booking.RegisteredMailId;
+            //ticketSearchModel.Remarks = booking.Remarks;
+            ticketSearchModel.SeatNos = booking.SeatNos;
+            ticketSearchModel.Status = booking.Status;
+            ticketSearchModel.ToDate = booking.ToDate;
+            ticketSearchModel.ToLocation = booking.ToLocation;
+            ticketSearchModel.TotalPrice = booking.TotalPrice;
+        }
+
+        public List<TicketSearchModel> GetTicketHistory(string emailId)
         {
             try
             {
-                return _userContext.FlightBooking.Where(c => c.RegisteredMailId.ToLower() == emailId.ToLower()).ToList();
+                List<TicketSearchModel> lstTicketSearchModel = new List<TicketSearchModel>();
+                var bopokings = _userContext.FlightBooking.Where(c => c.RegisteredMailId == emailId).ToList();
+                foreach (var booking in bopokings)
+                {
+                    TicketSearchModel ticketSearchModel = new TicketSearchModel();
+                    FillTicketSearchModel(ticketSearchModel, booking);
+                    var persons = _userContext.BookingPersons.Where(c => c.FlightBookingId == booking.Id).ToList();
+                    if (persons != null)
+                    {
+                        List<Persons> lstPersons = new List<Persons>();
+                        FillTicketSearchModel(ticketSearchModel, booking);
+                        if (persons != null && persons.Count() > 0)
+                        {
+                            FillPersons(lstPersons, persons);
+                        }
+                        ticketSearchModel.Persons = lstPersons;
+
+                    }
+                    lstTicketSearchModel.Add(ticketSearchModel);
+                }
+                return lstTicketSearchModel;
             }
             catch (Exception ex)
             {
