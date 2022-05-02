@@ -96,6 +96,8 @@ namespace AdminAPIServices
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder =>
+            { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
             //adminContext.Database.EnsureCreated();
             app.UseRouting();
 
