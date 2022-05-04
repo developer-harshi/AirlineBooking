@@ -23,6 +23,7 @@ namespace AirlineBooking
         {
             var key = "This is flight booking";
             services.AddOcelot();
+            services.AddCors();
 
 
 

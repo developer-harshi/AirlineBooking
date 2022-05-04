@@ -33,6 +33,7 @@ namespace UserAPIServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
             services.AddDbContext<UserContext>(con => con.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
             #region Swagger
             services.AddSwaggerGen(c =>
