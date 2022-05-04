@@ -1,5 +1,6 @@
 ﻿using AdminAPIServices.Authentication;
 using AdminAPIServices.Models;
+using AdminAPIServices.Entities;
 using AdminAPIServices.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -148,20 +149,37 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         //[Route("admin/login")]
+        [AllowAnonymous]
         [HttpPost("admin/login")]
         public ActionResult UserLogin(LoginModel loginModel)
         {
             try
             {
-                return Ok(_adminSrvice.UserLogIn(loginModel));
+                var token = _jwtAuthenticationManager.Authenticate(loginModel.Email, loginModel.Password);
+                if (token == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    loginModel.Token = token;
+                }
+
+                UserRegistrestion userRegistrestion = _adminSrvice.UserLogIn(loginModel);
+                if (userRegistrestion != null)
+                {
+                    loginModel.Role = userRegistrestion.Role;
+                }
+                return Ok(loginModel);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+        [AllowAnonymous]
         [HttpPost("usersignup")]
         //[Route("usersignup")]
         public ActionResult UserSignUp(UserRegistrestionModel userRegistrestionModel)

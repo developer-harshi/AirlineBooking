@@ -8,7 +8,7 @@ namespace AdminAPIServices.Models
     public class UserRegistrestionModel
     {
 
-        public Guid Id { get; set; }/*uniqueidentifier        not null, */
+        public Guid? Id { get; set; }/*uniqueidentifier        not null, */
 
         public string Name { get; set; }/*VARCHAR(500)            not null, */
 
@@ -26,6 +26,8 @@ namespace AdminAPIServices.Models
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Role { get; set; }
+        public string Token { get; set; }
 
     }
 }
