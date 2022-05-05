@@ -17,5 +17,6 @@ namespace AdminAPIServices.Services
         
         UserRegistrestionModel UserSignUp(UserRegistrestionModel userRegistrestionModel);
         UserRegistrestion UserLogIn(LoginModel loginModel);
+        List<Flight> GetAllFlights();
     }
 }

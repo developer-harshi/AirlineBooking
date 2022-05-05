@@ -196,7 +196,7 @@ namespace AdminAPIServices.Services
             try
             {
                 UserRegistrestion userRegistrestion = _adminContext.UserRegistrestion.Where(c => c.Email.ToLower() == loginModel.Email.ToLower()).FirstOrDefault();
-                if(userRegistrestion==null)
+                if (userRegistrestion == null)
                 {
                     throw new Exception("No user exist with this email.Please enter valid email");
                 }
@@ -211,6 +211,17 @@ namespace AdminAPIServices.Services
                 }
                 return userRegistrestion;
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<Flight> GetAllFlights()
+        {
+            try
+            {
+                return _adminContext.Flights.ToList();
             }
             catch (Exception ex)
             {

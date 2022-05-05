@@ -97,7 +97,7 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("getairline")]
+        [HttpGet("getairline/{id}")]
         //[Route("getairline")]
         public ActionResult GetAirline(Guid id)
         {
@@ -187,6 +187,19 @@ namespace AdminAPIServices.Controllers
             try
             {
                 return Ok(_adminSrvice.UserSignUp(userRegistrestionModel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("getallflights")]
+        //[Route("getallairlines")]
+        public ActionResult GetAllFlights()
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetAllFlights());
             }
             catch (Exception ex)
             {
