@@ -28,6 +28,12 @@ namespace UserAPIServices.Services
                 }
                 else
                 {
+                    var flight = _userContext.Flights.Where(c => c.Id == flightBookingModel.FlightId).FirstOrDefault();
+                    var user = _userContext.UserRegistrestion.Where(c => c.Email == flightBooking.RegisteredMailId).FirstOrDefault();
+                    flightBookingModel.FlightNumber = flight.FlightId;
+                    flightBookingModel.UserRegistrestionId = user.Id;
+                    flightBookingModel.FromLocation = flight.FromLocation;
+                    flightBookingModel.ToLocation = flight.ToLocation;
                     flightBooking = new FlightBooking();
                     flightBooking.Id = Guid.NewGuid();
                     flightBooking.Status = true;
@@ -275,7 +281,7 @@ namespace UserAPIServices.Services
             {
                 //BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
                 BookingPersons bookingPerson = new BookingPersons();
-                bookingPerson.Id =Guid.NewGuid();
+                bookingPerson.Id = Guid.NewGuid();
                 bookingPerson.Age = bookingPersonModel.Age;
                 bookingPerson.ContactNumber = bookingPersonModel.ContactNumber;
                 bookingPerson.DOB = bookingPersonModel.DOB;
@@ -292,6 +298,23 @@ namespace UserAPIServices.Services
 
 
             }
+        }
+        public List<FlightModel> FlightLu()
+        {
+            List<FlightModel> flightModels = new List<FlightModel>();
+               var flights = _userContext.Flights.Where(c => c.Status == true).ToList();
+            if (flights != null && flights.Count > 0)
+            {
+                foreach (var flight in flights)
+                {
+                    FlightModel flightModel = new FlightModel();
+                    flightModel.AirlineId = flight.AirlineId;
+                    flightModel.FlightNumber = flight.FlightId;
+                    flightModel.FlightId = flight.Id;
+                    flightModels.Add(flightModel);
+                }
+            }
+            return flightModels;
         }
     }
 }

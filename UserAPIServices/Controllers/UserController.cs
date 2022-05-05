@@ -142,6 +142,31 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet("flightlu")]
+        //[Route("gettickethistory")]
+        public ActionResult GetFlightLu()
+        {
+            try
+            {
+                return Ok(_userService.FlightLu());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("getflightbooking/{id}")]
+        //[Route("ticket")]
+        public ActionResult GetFlightBooking(Guid id)
+        {
+            try
+            {
+                return Ok(_userService.CreateFlightBookingModel(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

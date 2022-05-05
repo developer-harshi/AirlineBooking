@@ -15,5 +15,7 @@ namespace UserAPIServices.Services
         bool CancelTicket(string pnr);
         FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
         FlightBookingModel CreateFlightBookingModel(Guid id);
+        List<FlightModel> FlightLu();
+        //FlightBookingModel CreateFlightBookingModel(Guid id);
     }
 }

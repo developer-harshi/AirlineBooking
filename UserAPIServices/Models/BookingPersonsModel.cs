@@ -13,24 +13,24 @@ namespace UserAPIServices.Models
         //[ForeignKey("FlightBookingId")]
         //public FlightBooking FlightBooking { get; set; }
         public Guid? FlightBookingId { get; set; }//uniqueidentifier    
-        [Column("Veg")]
+        //[Column("Veg")]
         public bool Veg { get; set; }//Bit                     null,
-        [Column("NonVeg")]
+        //[Column("NonVeg")]
         public bool NonVeg { get; set; }
-        [Column("SeatNo")]
+        //[Column("SeatNo")]
         //[StringLength(500)]
         public int SeatNo { get; set; }
-        [Column(TypeName = "decimal(16,2)")]
+        //[Column(TypeName = "decimal(16,2)")]
         public decimal Price { get; set; }
-        [StringLength(500)]
+        //[StringLength(500)]
         public string Name { get; set; }
         public int Age { get; set; }
         public DateTime? DOB { get; set; }
-        [StringLength(50)]
+        //[StringLength(50)]
         public string Gender { get; set; }
-        [StringLength(50)]
+        //[StringLength(50)]
         public string Email { get; set; }
-        [StringLength(50)]
+        //[StringLength(50)]
         public string ContactNumber { get; set; }
     }
 }
