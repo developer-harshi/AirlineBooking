@@ -168,5 +168,18 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("getempty")]
+        //[Route("ticket")]
+        public ActionResult GetEmptyPerson()
+        {
+            try
+            {
+                return Ok(_userService.GetEmptyPerson());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

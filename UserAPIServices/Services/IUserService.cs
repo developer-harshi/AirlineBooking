@@ -17,5 +17,6 @@ namespace UserAPIServices.Services
         FlightBookingModel CreateFlightBookingModel(Guid id);
         List<FlightModel> FlightLu();
         //FlightBookingModel CreateFlightBookingModel(Guid id);
+        BookingPersonsModel GetEmptyPerson();
     }
 }

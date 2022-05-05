@@ -41,7 +41,7 @@ namespace UserAPIServices.Services
                     flightBooking.PNRNumber = DateTime.UtcNow.Day.ToString() + DateTime.UtcNow.Month.ToString() + "-" + DateTime.UtcNow.Year.ToString() + DateTime.UtcNow.Hour.ToString() + DateTime.UtcNow.Minute.ToString() + DateTime.UtcNow.Millisecond.ToString();
                     FillFlightBookingModelToEntity(flightBookingModel, flightBooking);
                     _userContext.FlightBooking.Add(flightBooking);
-                    FillBookingPersonsModeltoEntity(flightBookingModel,true);
+                    FillBookingPersonsModeltoEntity(flightBookingModel, true);
 
                 }
                 _userContext.SaveChanges();
@@ -250,17 +250,17 @@ namespace UserAPIServices.Services
                     {
                         BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
                         bookingPersonModel.Age = bookingPerson.Age;
-                        bookingPersonModel.ContactNumber = bookingPerson.ContactNumber;
-                        bookingPersonModel.DOB = bookingPerson.DOB;
-                        bookingPersonModel.Email = bookingPerson.Email;
+                        //bookingPersonModel.ContactNumber = bookingPerson.ContactNumber;
+                        //bookingPersonModel.DOB = bookingPerson.DOB;
+                        //bookingPersonModel.Email = bookingPerson.Email;
                         bookingPersonModel.FlightBookingId = bookingPerson.FlightBookingId;
                         bookingPersonModel.Gender = bookingPerson.Gender;
                         bookingPersonModel.Id = bookingPerson.Id;
                         bookingPersonModel.Name = bookingPerson.Name;
-                        bookingPersonModel.NonVeg = bookingPerson.NonVeg;
-                        bookingPersonModel.Price = bookingPerson.Price;
+                        //bookingPersonModel.NonVeg = bookingPerson.NonVeg;
+                        //bookingPersonModel.Price = bookingPerson.Price;
                         bookingPersonModel.SeatNo = bookingPerson.SeatNo;
-                        bookingPersonModel.Veg = bookingPerson.Veg;
+                        //bookingPersonModel.Veg = bookingPerson.Veg;
                         bookingPersonsModel.Add(bookingPersonModel);
                     }
                 }
@@ -283,17 +283,17 @@ namespace UserAPIServices.Services
                 BookingPersons bookingPerson = new BookingPersons();
                 bookingPerson.Id = Guid.NewGuid();
                 bookingPerson.Age = bookingPersonModel.Age;
-                bookingPerson.ContactNumber = bookingPersonModel.ContactNumber;
-                bookingPerson.DOB = bookingPersonModel.DOB;
-                bookingPerson.Email = bookingPersonModel.Email;
+                //bookingPerson.ContactNumber = bookingPersonModel.ContactNumber;
+                //bookingPerson.DOB = bookingPersonModel.DOB;
+                //bookingPerson.Email = bookingPersonModel.Email;
                 bookingPerson.FlightBookingId = flightBookingModel.Id;
                 bookingPerson.Gender = bookingPersonModel.Gender;
 
                 bookingPerson.Name = bookingPersonModel.Name;
-                bookingPerson.NonVeg = bookingPersonModel.NonVeg;
-                bookingPerson.Price = bookingPersonModel.Price;
+                //bookingPerson.NonVeg = bookingPersonModel.NonVeg;
+                //bookingPerson.Price = bookingPersonModel.Price;
                 bookingPerson.SeatNo = bookingPersonModel.SeatNo;
-                bookingPerson.Veg = bookingPersonModel.Veg;
+                //bookingPerson.Veg = bookingPersonModel.Veg;
                 _userContext.BookingPersons.Add(bookingPerson);
 
 
@@ -302,7 +302,7 @@ namespace UserAPIServices.Services
         public List<FlightModel> FlightLu()
         {
             List<FlightModel> flightModels = new List<FlightModel>();
-               var flights = _userContext.Flights.Where(c => c.Status == true).ToList();
+            var flights = _userContext.Flights.Where(c => c.Status == true).ToList();
             if (flights != null && flights.Count > 0)
             {
                 foreach (var flight in flights)
@@ -315,6 +315,12 @@ namespace UserAPIServices.Services
                 }
             }
             return flightModels;
+        }
+
+        public BookingPersonsModel GetEmptyPerson()
+        {
+            BookingPersonsModel bookingPersonsModel = new BookingPersonsModel();
+            return bookingPersonsModel;
         }
     }
 }
