@@ -25,7 +25,7 @@ namespace UserAPIServices.Entities
         //[StringLength(500)]
         public int SeatNo { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         [StringLength(500)]
         public string Name { get; set; }
         public int Age { get; set; }
