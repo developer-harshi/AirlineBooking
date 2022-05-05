@@ -132,7 +132,7 @@ namespace UserAPIServices.Services
             ticketSearchModel.ContactNumber = booking.ContactNumber;
             //ticketSearchModel.FlightId = booking.FlightId;
             ticketSearchModel.FlightNumber = booking.FlightNumber;
-            ticketSearchModel.FromDate = booking.FromDate;
+            //ticketSearchModel.FromDate = booking.FromDate;
             ticketSearchModel.FromLocation = booking.FromLocation;
             ticketSearchModel.Id = booking.Id;
             //ticketSearchModel.NoOfBUSeats = booking.NoOfBUSeats;
@@ -142,9 +142,9 @@ namespace UserAPIServices.Services
             //ticketSearchModel.Remarks = booking.Remarks;
             ticketSearchModel.SeatNos = booking.SeatNos;
             ticketSearchModel.Status = booking.Status;
-            ticketSearchModel.ToDate = booking.ToDate;
+            //ticketSearchModel.ToDate = booking.ToDate;
             ticketSearchModel.ToLocation = booking.ToLocation;
-            ticketSearchModel.TotalPrice = booking.TotalPrice;
+            //ticketSearchModel.TotalPrice = booking.TotalPrice;
         }
 
         public List<TicketSearchModel> GetTicketHistory(string emailId)
@@ -230,19 +230,19 @@ namespace UserAPIServices.Services
                 flightBookingModel.ContactNumber = flightBooking1.ContactNumber;
                 flightBookingModel.FlightId = flightBooking1.FlightId;
                 flightBookingModel.FlightNumber = flightBooking1.FlightNumber;
-                flightBookingModel.FromDate = flightBooking1.FromDate;
+                //flightBookingModel.FromDate = flightBooking1.FromDate;
                 flightBookingModel.FromLocation = flightBooking1.FromLocation;
                 flightBookingModel.Id = flightBooking1.Id;
-                flightBookingModel.NoOfBUSeats = flightBooking1.NoOfBUSeats;
-                flightBookingModel.NoOfNONBUSeats = flightBooking1.NoOfNONBUSeats;
+                //flightBookingModel.NoOfBUSeats = flightBooking1.NoOfBUSeats;
+                //flightBookingModel.NoOfNONBUSeats = flightBooking1.NoOfNONBUSeats;
                 flightBookingModel.PNRNumber = flightBooking1.PNRNumber;
                 flightBookingModel.RegisteredMailId = flightBooking1.RegisteredMailId;
                 flightBookingModel.Remarks = flightBooking1.Remarks;
                 flightBookingModel.SeatNos = flightBooking1.SeatNos;
                 flightBookingModel.Status = flightBooking1.Status;
-                flightBookingModel.ToDate = flightBooking1.ToDate;
+                //flightBookingModel.ToDate = flightBooking1.ToDate;
                 flightBookingModel.ToLocation = flightBooking1.ToLocation;
-                flightBookingModel.TotalPrice = flightBooking1.TotalPrice;
+                //flightBookingModel.TotalPrice = flightBooking1.TotalPrice;
                 flightBookingModel.UserRegistrestionId = flightBooking1.UserRegistrestionId;
                 if (lstBookingPersons != null && lstBookingPersons.Count() > 0)
                 {
