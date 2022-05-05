@@ -136,7 +136,7 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("getflight")]
+        [HttpGet("getflight/{id}")]
         //[Route("getflight")]
         public ActionResult GetFlight(Guid id)
         {
@@ -200,6 +200,19 @@ namespace AdminAPIServices.Controllers
             try
             {
                 return Ok(_adminSrvice.GetAllFlights());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("getairlinelu")]
+        //[Route("getallairlines")]
+        public ActionResult GetAirlineLookup()
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetAirlineLu());
             }
             catch (Exception ex)
             {

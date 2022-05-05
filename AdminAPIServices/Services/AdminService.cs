@@ -129,19 +129,19 @@ namespace AdminAPIServices.Services
         {
             flight.AirlineId = flightModel.AirlineId;
             flight.FlightId = flightModel.FlightId;
-            flight.FromDate = flightModel.FromDate;
+            flight.FromDate = flightModel.FromDate??DateTime.UtcNow;
             flight.FromLocation = flightModel.FromLocation;
 
-            flight.NonVeg = flightModel.NonVeg;
-            flight.Veg = flightModel.Veg;
+            flight.NonVeg = flightModel.NonVeg??false;
+            flight.Veg = flightModel.Veg??false;
             flight.NoOfBUSeats = flightModel.NoOfBUSeats;
             flight.NoOfNONBUSeats = flightModel.NoOfNONBUSeats;
             flight.NoOfRows = flightModel.NoOfRows;
-            flight.Price = flightModel.Price;
+            flight.Price = flightModel.Price??0;
             flight.Remarks = flightModel.Remarks;
             flight.Sheduled = flightModel.Sheduled;
 
-            flight.ToDate = flightModel.ToDate;
+            flight.ToDate = flightModel.ToDate ?? DateTime.UtcNow;
             flight.ToLocation = flightModel.ToLocation;
         }
         public Flight GetFlight(Guid id)
@@ -227,6 +227,23 @@ namespace AdminAPIServices.Services
             {
                 throw ex;
             }
+        }
+
+        public List<AirlineLu> GetAirlineLu()
+        {
+            List<AirlineLu> lookup = new List<AirlineLu> ();
+            var airlines =  _adminContext.Airline.ToList();
+            if (airlines != null && airlines.Count > 0)
+            {
+                foreach (var airline in airlines)
+                {
+                    AirlineLu airlineLu = new AirlineLu();
+                    airlineLu.AirlineName = airline.Name;
+                    airlineLu.AirlineId = airline.Id;
+                    lookup.Add(airlineLu);
+                }
+            }
+            return lookup;
         }
     }
 }
