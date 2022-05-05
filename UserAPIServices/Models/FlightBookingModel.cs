@@ -24,9 +24,9 @@ namespace UserAPIServices.Models
         //public Airline Airline { get; set; }
         public Guid? AirlineId { get; set; }//uniqueidentifier        null,
         //[Column("FromDate")]
-        public DateTime FromDate { get; set; }         //datetime2(7)            null, 
+        public DateTime? FromDate { get; set; }         //datetime2(7)            null, 
         //[Column("ToDate")]
-        public DateTime ToDate { get; set; }//datetime2(7)            null, 
+        public DateTime? ToDate { get; set; }//datetime2(7)            null, 
         //[Column("FromLocation")]
         //[StringLength(500)]
         public string FromLocation { get; set; }//VARCHAR(500)            null, 
@@ -35,9 +35,9 @@ namespace UserAPIServices.Models
         public string ToLocation { get; set; }//VARCHAR(500)            null, 
                                               //bit                     null, 
         //[Column("NoOfBUSeats")]
-        public int NoOfBUSeats { get; set; }              //     null, 
+        public int? NoOfBUSeats { get; set; }              //     null, 
         //[Column("NoOfNONBUSeats")]
-        public int NoOfNONBUSeats { get; set; }               //  null, 
+        public int? NoOfNONBUSeats { get; set; }               //  null, 
         //[Column("Remarks")]
         //[StringLength(500)]
         public string Remarks { get; set; }//VARCHAR(500)            null, 
@@ -45,7 +45,7 @@ namespace UserAPIServices.Models
         //  null, 
         //[Column("Price")]
         //[Column(TypeName = "decimal(16,2)")]
-        public decimal TotalPrice { get; set; }//money                   null,
+        public decimal? TotalPrice { get; set; }//money                   null,
         //[Column("PNRNumber")]
         //[StringLength(500)]
         public string PNRNumber { get; set; }        // varchar(300)            null, 

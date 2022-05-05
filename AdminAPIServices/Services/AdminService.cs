@@ -129,7 +129,7 @@ namespace AdminAPIServices.Services
         {
             flight.AirlineId = flightModel.AirlineId;
             flight.FlightId = flightModel.FlightId;
-            flight.FromDate = flightModel.FromDate??DateTime.UtcNow;
+            flight.FromDate = flightModel.FromDate??DateTime.UtcNow.Date;
             flight.FromLocation = flightModel.FromLocation;
 
             flight.NonVeg = flightModel.NonVeg??false;
@@ -141,7 +141,7 @@ namespace AdminAPIServices.Services
             flight.Remarks = flightModel.Remarks;
             flight.Sheduled = flightModel.Sheduled;
 
-            flight.ToDate = flightModel.ToDate ?? DateTime.UtcNow;
+            flight.ToDate = flightModel.ToDate ?? DateTime.UtcNow.Date;
             flight.ToLocation = flightModel.ToLocation;
         }
         public Flight GetFlight(Guid id)

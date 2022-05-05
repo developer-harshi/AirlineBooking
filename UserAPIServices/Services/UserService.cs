@@ -29,7 +29,7 @@ namespace UserAPIServices.Services
                 else
                 {
                     var flight = _userContext.Flights.Where(c => c.Id == flightBookingModel.FlightId).FirstOrDefault();
-                    var user = _userContext.UserRegistrestion.Where(c => c.Email == flightBooking.RegisteredMailId).FirstOrDefault();
+                    var user = _userContext.UserRegistrestion.Where(c => c.Email == flightBookingModel.RegisteredMailId).FirstOrDefault();
                     flightBookingModel.FlightNumber = flight.FlightId;
                     flightBookingModel.UserRegistrestionId = user.Id;
                     flightBookingModel.FromLocation = flight.FromLocation;
@@ -292,7 +292,7 @@ namespace UserAPIServices.Services
                 bookingPerson.Name = bookingPersonModel.Name;
                 //bookingPerson.NonVeg = bookingPersonModel.NonVeg;
                 //bookingPerson.Price = bookingPersonModel.Price;
-                bookingPerson.SeatNo = bookingPersonModel.SeatNo;
+                bookingPerson.SeatNo = bookingPersonModel.SeatNo??0;
                 //bookingPerson.Veg = bookingPersonModel.Veg;
                 _userContext.BookingPersons.Add(bookingPerson);
 

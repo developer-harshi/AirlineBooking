@@ -9,7 +9,7 @@ namespace UserAPIServices.Models
 {
     public class BookingPersonsModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         //[ForeignKey("FlightBookingId")]
         //public FlightBooking FlightBooking { get; set; }
         public Guid? FlightBookingId { get; set; }//uniqueidentifier    
@@ -19,7 +19,7 @@ namespace UserAPIServices.Models
         //public bool NonVeg { get; set; }
         //[Column("SeatNo")]
         //[StringLength(500)]
-        public int SeatNo { get; set; }
+        public int? SeatNo { get; set; }
         //[Column(TypeName = "decimal(16,2)")]
         //public decimal Price { get; set; }
         //[StringLength(500)]

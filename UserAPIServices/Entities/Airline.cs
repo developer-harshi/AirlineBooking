@@ -25,6 +25,7 @@ namespace UserAPIServices.Entities
         public string ContactAddress { get; set; }
         [Column("Status")]
         public bool Status { get; set; }
+        public string ActiveStatus { get; set; }
         public ICollection<Flight> Flights { get; set; }
         public ICollection<FlightBooking> FlightBookings { get; set; }
     }
