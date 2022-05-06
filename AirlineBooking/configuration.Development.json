@@ -10,11 +10,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -33,13 +34,15 @@
           "Host": "localhost",
           "Port": 9001
         }
-      ],
+      ]
+      ,
       "UpstreamPathTemplate": "/api/v1.0/flight/getallairlines",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -59,13 +62,15 @@
           "Host": "localhost",
           "Port": 9001
         }
-      ],
+      ]
+      ,
       "UpstreamPathTemplate": "/api/v1.0/flight/airline/register",
-      "UpstreamHttpMethod": [ "Post" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Post" ]
+      ,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -86,11 +91,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/airline/inventory/add",
-      "UpstreamHttpMethod": [ "Post" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Post" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -111,11 +117,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/search",
-      "UpstreamHttpMethod": [ "Post" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Post" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -162,11 +169,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/user",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -187,11 +195,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/ticket/{pnr}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -212,11 +221,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking",
-      "UpstreamHttpMethod": [ "Post" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Post" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -237,11 +247,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking/history/{emailId}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -262,11 +273,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/booking/cancel/{pnr}",
-      "UpstreamHttpMethod": [ "Delete" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Delete" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -313,11 +325,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getallflights",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -338,11 +351,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getairlinelu",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -363,11 +377,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getflight/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -388,11 +403,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/flightlu",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -413,11 +429,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getflightbooking/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -438,11 +455,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getempty",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
@@ -463,11 +481,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/getairline/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
       //,
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
