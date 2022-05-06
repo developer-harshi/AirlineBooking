@@ -132,7 +132,7 @@ namespace UserAPIServices.Services
             ticketSearchModel.ContactNumber = booking.ContactNumber;
             //ticketSearchModel.FlightId = booking.FlightId;
             ticketSearchModel.FlightNumber = booking.FlightNumber;
-            //ticketSearchModel.FromDate = booking.FromDate;
+            ticketSearchModel.FromDate = booking.FromDate??DateTime.UtcNow.Date;
             ticketSearchModel.FromLocation = booking.FromLocation;
             ticketSearchModel.Id = booking.Id;
             //ticketSearchModel.NoOfBUSeats = booking.NoOfBUSeats;
@@ -144,7 +144,8 @@ namespace UserAPIServices.Services
             ticketSearchModel.Status = booking.Status;
             //ticketSearchModel.ToDate = booking.ToDate;
             ticketSearchModel.ToLocation = booking.ToLocation;
-            //ticketSearchModel.TotalPrice = booking.TotalPrice;
+            ticketSearchModel.TotalPrice = booking.TotalPrice??0;
+            ticketSearchModel.TicketStatus = booking.Status == true ? "booked" : "Cancelled";
         }
 
         public List<TicketSearchModel> GetTicketHistory(string emailId)

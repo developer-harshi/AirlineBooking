@@ -43,6 +43,7 @@ namespace UserAPIServices.Models
 
         public bool Status { get; set; }//bit                     null,
         public string SeatNos { get; set; }
+        public string TicketStatus { get; set; }
         public List<Persons> Persons { get; set; }
     }
     public class Persons
