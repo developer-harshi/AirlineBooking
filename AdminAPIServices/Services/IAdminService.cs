@@ -13,11 +13,11 @@ namespace AdminAPIServices.Services
         AirlineModel GetAirline(Guid id);
         AirlineModel SaveAirline(AirlineModel airlineModel);
         FlightModel ScheduleFlight(FlightModel flightModel);
-        Flight GetFlight(Guid id);
+        FlightModel GetFlight(Guid id);
         
         UserRegistrestionModel UserSignUp(UserRegistrestionModel userRegistrestionModel);
         UserRegistrestion UserLogIn(LoginModel loginModel);
-        List<Flight> GetAllFlights();
+        List<FlightModel> GetAllFlights();
         List<AirlineLu> GetAirlineLu();
         DiscountModel GetDiscount(Guid id);
         List<DiscountModel> GetDiscounts();

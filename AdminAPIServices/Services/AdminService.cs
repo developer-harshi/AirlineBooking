@@ -166,16 +166,34 @@ namespace AdminAPIServices.Services
             flight.ToDate = flightModel.ToDate ?? DateTime.UtcNow.Date;
             flight.ToLocation = flightModel.ToLocation;
         }
-        public Flight GetFlight(Guid id)
+        public FlightModel GetFlight(Guid id)
         {
             try
             {
+                FlightModel flightModel = new FlightModel();
                 Flight flight = _adminContext.Flights.Where(c => c.Id == id).FirstOrDefault();
-                if (flight == null)
+                if (flight != null)
                 {
-                    flight = new Flight();
+                    flightModel.Id = flight.Id;
+                    flightModel.Status = flight.Status==false?"InActive":"Active";
+                    flightModel.AirlineId = flight.AirlineId;
+                    flightModel.FlightId = flight.FlightId;
+                    flightModel.FromDate = flight.FromDate ?? DateTime.UtcNow.Date;
+                    flightModel.FromLocation = flight.FromLocation;
+
+                    flightModel.NonVeg = flight.NonVeg ;
+                    flightModel.Veg = flight.Veg ;
+                    flightModel.NoOfBUSeats = flight.NoOfBUSeats;
+                    flightModel.NoOfNONBUSeats = flight.NoOfNONBUSeats;
+                    flightModel.NoOfRows = flight.NoOfRows;
+                    flightModel.Price = flight.Price ;
+                    flightModel.Remarks = flight.Remarks;
+                    flightModel.Sheduled = flight.Sheduled;
+
+                    flightModel.ToDate = flight.ToDate ?? DateTime.UtcNow.Date;
+                    flightModel.ToLocation = flight.ToLocation;
                 }
-                return flight;
+                return flightModel;
             }
             catch (Exception ex)
             {
@@ -239,11 +257,36 @@ namespace AdminAPIServices.Services
                 throw ex;
             }
         }
-        public List<Flight> GetAllFlights()
+        public List<FlightModel> GetAllFlights()
         {
             try
             {
-                return _adminContext.Flights.ToList();
+                List<FlightModel> flightModels = new List<FlightModel>();
+                var flights = _adminContext.Flights.ToList();
+                foreach (var flight in flights)
+                {
+                    FlightModel flightModel = new FlightModel();
+                    flightModel.Id = flight.Id;
+                    flightModel.Status = flight.Status == false ? "InActive" : "Active";
+                    flightModel.AirlineId = flight.AirlineId;
+                    flightModel.FlightId = flight.FlightId;
+                    flightModel.FromDate = flight.FromDate ?? DateTime.UtcNow.Date;
+                    flightModel.FromLocation = flight.FromLocation;
+
+                    flightModel.NonVeg = flight.NonVeg;
+                    flightModel.Veg = flight.Veg;
+                    flightModel.NoOfBUSeats = flight.NoOfBUSeats;
+                    flightModel.NoOfNONBUSeats = flight.NoOfNONBUSeats;
+                    flightModel.NoOfRows = flight.NoOfRows;
+                    flightModel.Price = flight.Price;
+                    flightModel.Remarks = flight.Remarks;
+                    flightModel.Sheduled = flight.Sheduled;
+
+                    flightModel.ToDate = flight.ToDate ?? DateTime.UtcNow.Date;
+                    flightModel.ToLocation = flight.ToLocation;
+                    flightModels.Add(flightModel);
+                }
+                return flightModels;
             }
             catch (Exception ex)
             {
