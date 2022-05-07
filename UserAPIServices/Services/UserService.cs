@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +13,11 @@ namespace UserAPIServices.Services
     public class UserService : IUserService
     {
         private readonly UserContext _userContext;
-        public UserService(UserContext userContext)
+        private IConfiguration _configuration;
+        public UserService(UserContext userContext, IConfiguration configuration)
         {
             _userContext = userContext;
+            this._configuration = configuration;
         }
         public FlightBookingModel SaveFlightBooking(FlightBookingModel flightBookingModel)
         {
@@ -335,6 +339,25 @@ namespace UserAPIServices.Services
                 discountModels.Add(discountModel);
             }
             return discountModels;
+        }
+        public bool ActiveInActive(string tableName,Guid id ,string status)
+        {
+            try
+            {
+                int changedStatus = (status.ToLower() == "inactive") ? 1 : 0;
+                SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
+                //var query = $"select Status from dbo.UserRegistrestion where Email='{userName}' and [Password]='{password}'";
+                var query = $"update '{tableName}' set status='{changedStatus}' where Id='{id}'";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

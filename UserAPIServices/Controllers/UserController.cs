@@ -194,5 +194,17 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("ActiveInActive/{tableName}/{id}/{status}")]
+        public ActionResult ActiveInActive(string tableName, Guid id, string status)
+        {
+            try
+            {
+                return Ok(_userService.ActiveInActive(tableName, id, status));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AdminAPIServices.Context;
 using AdminAPIServices.Entities;
 using AdminAPIServices.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,11 @@ namespace AdminAPIServices.Services
     public class AdminService : IAdminService
     {
         private readonly AdminContext _adminContext;
-        public AdminService(AdminContext adminContext)
+        private IConfiguration _configuration;
+        public AdminService(AdminContext adminContext, IConfiguration configuration)
         {
             _adminContext = adminContext;
+            this._configuration = configuration;
         }
 
 
@@ -362,6 +366,25 @@ namespace AdminAPIServices.Services
             }
             _adminContext.SaveChanges();
             return discountModel;
+        }
+        public bool ActiveInActive(string tableName, Guid id, string status)
+        {
+            try
+            {
+                int changedStatus = (status.ToLower() == "inactive") ? 1 : 0;
+                SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
+                //var query = $"select Status from dbo.UserRegistrestion where Email='{userName}' and [Password]='{password}'";
+                var query = $"update '{tableName}' set status='{changedStatus}' where Id='{id}'";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

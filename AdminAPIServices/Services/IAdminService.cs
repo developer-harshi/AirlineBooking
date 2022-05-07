@@ -22,5 +22,6 @@ namespace AdminAPIServices.Services
         DiscountModel GetDiscount(Guid id);
         List<DiscountModel> GetDiscounts();
         DiscountModel SaveDiscount(DiscountModel discountModel);
+        bool ActiveInActive(string tableName, Guid id, string status);
     }
 }

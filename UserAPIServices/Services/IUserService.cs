@@ -19,5 +19,6 @@ namespace UserAPIServices.Services
         //FlightBookingModel CreateFlightBookingModel(Guid id);
         BookingPersonsModel GetEmptyPerson();
         List<DiscountModel> GetDiscount();
+        bool ActiveInActive(string tableName, Guid id, string status);
     }
 }
