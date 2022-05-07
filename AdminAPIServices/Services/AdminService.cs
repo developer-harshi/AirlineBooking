@@ -17,27 +17,49 @@ namespace AdminAPIServices.Services
         }
 
 
-        public List<Airline> GetAllAirlines()
+        public List<AirlineModel> GetAllAirlines()
         {
             try
             {
-                return _adminContext.Airline.ToList();
+                List<AirlineModel> airlineModels = new List<AirlineModel>();
+                var airlines = _adminContext.Airline.ToList();
+                if (airlines != null)
+                {
+                    foreach (var airline in airlines)
+                    {
+                        AirlineModel airlineModel = new AirlineModel();
+                        airlineModel.ContactAddress = airline.ContactAddress;
+                        airlineModel.ContactNumber = airline.ContactNumber;
+                        airlineModel.Id = airline.Id;
+                        airlineModel.Name = airline.Name;
+                        airlineModel.Status = airline.Status == false ? "InActive" : "Active";
+                        airlineModels.Add(airlineModel);
+                    }
+                }
+                return airlineModels;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            
         }
-        public Airline GetAirline(Guid id)
+        public AirlineModel GetAirline(Guid id)
         {
             try
             {
+                AirlineModel airlineModel = new AirlineModel();
                 Airline airline = _adminContext.Airline.Where(c => c.Id == id).FirstOrDefault();
-                if (airline == null)
+                if(airline!=null)
                 {
-                    airline = new Airline();
+                    airlineModel.ContactAddress = airline.ContactAddress;
+                    airlineModel.ContactNumber = airline.ContactNumber;
+                    airlineModel.Id = airline.Id;
+                    airlineModel.Name = airline.Name;
+                    airlineModel.Status = airline.Status == false ? "InActive" : "Active";
                 }
-                return airline;
+                
+                return airlineModel;
             }
             catch (Exception ex)
             {

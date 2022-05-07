@@ -9,8 +9,8 @@ namespace AdminAPIServices.Services
 {
     public interface IAdminService
     {
-        List<Airline> GetAllAirlines();
-        Airline GetAirline(Guid id);
+        List<AirlineModel> GetAllAirlines();
+        AirlineModel GetAirline(Guid id);
         AirlineModel SaveAirline(AirlineModel airlineModel);
         FlightModel ScheduleFlight(FlightModel flightModel);
         Flight GetFlight(Guid id);
