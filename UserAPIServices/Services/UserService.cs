@@ -323,5 +323,18 @@ namespace UserAPIServices.Services
             BookingPersonsModel bookingPersonsModel = new BookingPersonsModel();
             return bookingPersonsModel;
         }
+        public List<DiscountModel> GetDiscount()
+        {
+            List<DiscountModel> discountModels = new List<DiscountModel>();
+            var discounts = _userContext.Discount.Where(c => c.Status == true).ToList();
+            foreach (var discount in discounts)
+            {
+                DiscountModel discountModel = new DiscountModel();
+                discountModel.Name = discount.CouponName;
+                discountModel.Value = discount.Value;
+                discountModels.Add(discountModel);
+            }
+            return discountModels;
+        }
     }
 }

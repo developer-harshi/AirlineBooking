@@ -74,4 +74,9 @@ namespace UserAPIServices.Models
         public string FlightNumber { get; set; }
         public Guid? AirlineId { get; set; }
     }
+    public class DiscountModel
+    {
+        public string Name { get; set; }
+        public decimal? Value { get; set; }
+    }
 }

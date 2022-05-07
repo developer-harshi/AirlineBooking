@@ -16,6 +16,6 @@ namespace AdminAPIServices.Models
        
         public string ContactAddress { get; set; }
        
-        public bool Status { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -231,8 +231,8 @@ namespace AdminAPIServices.Services
 
         public List<AirlineLu> GetAirlineLu()
         {
-            List<AirlineLu> lookup = new List<AirlineLu> ();
-            var airlines =  _adminContext.Airline.ToList();
+            List<AirlineLu> lookup = new List<AirlineLu>();
+            var airlines = _adminContext.Airline.ToList();
             if (airlines != null && airlines.Count > 0)
             {
                 foreach (var airline in airlines)
@@ -244,6 +244,59 @@ namespace AdminAPIServices.Services
                 }
             }
             return lookup;
+        }
+        public DiscountModel GetDiscount(Guid id)
+        {
+            DiscountModel discountModel = new DiscountModel();
+            Discount discount = _adminContext.Discount.Where(c => c.Id == id).FirstOrDefault();
+            if (discount != null)
+            {
+                discountModel.Id = discount.Id;
+                discountModel.CouponName = discount.CouponName;
+                discountModel.Value = discount.Value;
+                discountModel.Status = discount.Status == true ? "Active" : "InActive";
+            }
+            return discountModel;
+        }
+        public List<DiscountModel> GetDiscounts()
+        {
+            List<DiscountModel> discountModels = new List<DiscountModel>();
+            var discounts = _adminContext.Discount.ToList();
+            foreach (var discount in discounts)
+            {
+                DiscountModel discountModel = new DiscountModel();
+                discountModel.Id = discount.Id;
+                discountModel.CouponName = discount.CouponName;
+                discountModel.Value = discount.Value;
+                discountModel.Status = discount.Status == true ? "Active" : "InActive";
+                discountModels.Add(discountModel);
+            }
+            return discountModels;
+        }
+        public DiscountModel SaveDiscount(DiscountModel discountModel)
+        {
+            Discount discount = _adminContext.Discount.Where(c => c.Id == discountModel.Id).FirstOrDefault();
+            if (discount != null)
+            {
+                //discountModel.Id = discount.Id;
+                discount.CouponName = discountModel.CouponName;
+                discount.Value = discountModel.Value;
+                //discountModel.Status = discount.Status == true ? "Active" : "InActive";  
+                _adminContext.Discount.Update(discount);
+
+            }
+            else
+            {
+                discount = new Discount();
+                discountModel.Id = Guid.NewGuid();
+                discount.Id = discountModel.Id;
+                discount.CouponName = discountModel.CouponName;
+                discount.Value = discountModel.Value;
+                discount.Status = true;
+                _adminContext.Discount.Add(discount);
+            }
+            _adminContext.SaveChanges();
+            return discountModel;
         }
     }
 }

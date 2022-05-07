@@ -16,6 +16,7 @@ namespace AdminAPIServices.Context
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Airline> Airline { get; set; }
         public DbSet<UserRegistrestion> UserRegistrestion { get; set; }
+        public DbSet<Discount> Discount { get; set; }
     }
 }
 //add-migration AdminContextMigration

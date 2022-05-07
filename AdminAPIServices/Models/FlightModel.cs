@@ -41,7 +41,7 @@ namespace AdminAPIServices.Models
 
         public string? Sheduled { get; set; }/*VARCHAR(50)             null,--Daily ,Weekly ,EveryDay,Weekend,WeekDays*/
 
-        public bool? Status { get; set; }/*bit                     null,*/
+        public string Status { get; set; }/*bit                     null,*/
         public string? AirlineName { get; set; }
     }
     public class AirlineLu

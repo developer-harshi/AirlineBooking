@@ -19,5 +19,8 @@ namespace AdminAPIServices.Services
         UserRegistrestion UserLogIn(LoginModel loginModel);
         List<Flight> GetAllFlights();
         List<AirlineLu> GetAirlineLu();
+        DiscountModel GetDiscount(Guid id);
+        List<DiscountModel> GetDiscounts();
+        DiscountModel SaveDiscount(DiscountModel discountModel);
     }
 }

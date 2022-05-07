@@ -16,13 +16,13 @@ namespace AdminAPIServices.Controllers
 {
     //[Route("api/[controller]")]
     [Authorize]
-    [Route("api/v1.0/flight")]    
+    [Route("api/v1.0/flight")]
     [ApiController]
     public class AdminController : ControllerBase
     {
         public readonly IAdminService _adminSrvice;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        public AdminController(IAdminService adminService,IJwtAuthenticationManager jwtAuthenticationManager)
+        public AdminController(IAdminService adminService, IJwtAuthenticationManager jwtAuthenticationManager)
         {
             this._adminSrvice = adminService;
             this._jwtAuthenticationManager = jwtAuthenticationManager;
@@ -68,10 +68,10 @@ namespace AdminAPIServices.Controllers
 
         [AllowAnonymous]
         [HttpGet("Authenticate")]
-        public IActionResult GetAuthentication(string username,string password)
+        public IActionResult GetAuthentication(string username, string password)
         {
             var token = _jwtAuthenticationManager.Authenticate(username, password);
-            if(token==null)
+            if (token == null)
             {
                 return Unauthorized();
             }
@@ -213,6 +213,45 @@ namespace AdminAPIServices.Controllers
             try
             {
                 return Ok(_adminSrvice.GetAirlineLu());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("getdiscount/{id}")]
+        //[Route("getallairlines")]
+        public ActionResult GetDiscount(Guid id)
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetDiscount(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("getdiscounts")]
+        //[Route("getallairlines")]
+        public ActionResult GetDiscounts()
+        {
+            try
+            {
+                return Ok(_adminSrvice.GetDiscounts());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("savediscount")]
+        //[Route("getallairlines")]
+        public ActionResult SaveDiscount(DiscountModel discountModel)
+        {
+            try
+            {
+                return Ok(_adminSrvice.SaveDiscount(discountModel));
             }
             catch (Exception ex)
             {

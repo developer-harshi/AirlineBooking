@@ -18,6 +18,7 @@ namespace UserAPIServices.Context
         public DbSet<UserRegistrestion> UserRegistrestion { get; set; }
         public DbSet<FlightBooking> FlightBooking { get; set; }
         public DbSet<BookingPersons> BookingPersons { get; set; }
+        public DbSet<Discount> Discount { get; set; }
     }
 }
 //add-migration userContextMigration

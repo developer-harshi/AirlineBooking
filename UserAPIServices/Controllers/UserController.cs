@@ -181,5 +181,18 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("getdiscount")]
+        //[Route("ticket")]
+        public ActionResult GetDiscount()
+        {
+            try
+            {
+                return Ok(_userService.GetDiscount());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
