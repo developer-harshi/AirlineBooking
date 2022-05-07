@@ -79,6 +79,7 @@ namespace UserAPIServices.Services
             flightBooking.ToLocation = flightBookingModel.ToLocation;
             flightBooking.UserRegistrestionId = flightBookingModel.UserRegistrestionId;
             //flightBooking.Veg = flightBookingModel.Veg;
+            flightBooking.Discount = flightBookingModel.Discount;
         }
         public TicketSearchModel GetTicketByPNR(string pnr)
         {
@@ -222,7 +223,7 @@ namespace UserAPIServices.Services
             }
         }
 
-        public FlightBookingModel CreateFlightBookingModel(Guid id)
+        public FlightBookingModel CreateFlightBookingModel(Guid id,Guid? flightId)
         {
             FlightBookingModel flightBookingModel = new FlightBookingModel();
             List<BookingPersonsModel> bookingPersonsModel = new List<BookingPersonsModel>();
@@ -275,6 +276,15 @@ namespace UserAPIServices.Services
             else
             {
                 BookingPersonsModel bookingPersonModel = new BookingPersonsModel();
+                Flight flight = _userContext.Flights.Where(c => c.Id == flightId).FirstOrDefault();
+                if(flight!=null)
+                {
+                    flightBookingModel.FlightId = flight.Id;
+                    flightBookingModel.FlightNumber = flight.FlightId;
+                    flightBookingModel.FlightPrice = flight.Price;
+                    flightBookingModel.AirlineId = flight.AirlineId;
+                    flightBookingModel.AirlineName = flight.AirlineName;
+                }
                 bookingPersonsModel.Add(bookingPersonModel);
                 flightBookingModel.BookingPersonsModel = bookingPersonsModel;
             }

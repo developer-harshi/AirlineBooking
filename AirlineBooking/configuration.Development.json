@@ -418,7 +418,7 @@
       //"FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
-      "DownstreamPathTemplate": "/api/v1.0/flight/getflightbooking/{id}",
+      "DownstreamPathTemplate": "/api/v1.0/flight/getflightbooking/{id}/{flightid}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -426,7 +426,7 @@
           "Port": 9002
         }
       ],
-      "UpstreamPathTemplate": "/api/v1.0/flight/getflightbooking/{id}",
+      "UpstreamPathTemplate": "/api/v1.0/flight/getflightbooking/{id}/{flightid}",
       "UpstreamHttpMethod": [ "Get" ]
       //,
       //"AuthenticationOptions": {
@@ -610,6 +610,58 @@
       ],
       "UpstreamPathTemplate": "/api/v1.0/flight/activeinActiveuser/{tableName}/{id}/{status}",
       "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
+      //,
+      //"RateLimitOptions": {
+      //  "ClientWhitelist": [],
+      //  "EnableRateLimiting": true,
+      //  "Period": "5s",
+      //  "PeriodTimespan": 1,
+      //  "Limit": 1
+      //},
+      //"FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1.0/flight/getdiscount",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/flight/getdiscount",
+      "UpstreamHttpMethod": [ "Get" ]
+      //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
+      //,
+      //"RateLimitOptions": {
+      //  "ClientWhitelist": [],
+      //  "EnableRateLimiting": true,
+      //  "Period": "5s",
+      //  "PeriodTimespan": 1,
+      //  "Limit": 1
+      //},
+      //"FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1.0/flight/authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1.0/flight/authenticate",
+      "UpstreamHttpMethod": [ "Post" ]
       //,
       //"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "Bearer",

@@ -31,17 +31,18 @@ namespace UserAPIServices.Controllers
             return "Hello from User API Service";
         }
         [AllowAnonymous]
-        [HttpGet("Authenticate")]
-        public IActionResult GetAuthentication(string username, string password)
+        [HttpPost("authenticate")]
+        public IActionResult GetAuthentication(LoginModel loginModel)
         {
-            var token = _jwtAuthenticationManager.Authenticate(username, password);
+            var token = _jwtAuthenticationManager.Authenticate(loginModel.Email, loginModel.Password);
             if (token == null)
             {
                 return Unauthorized();
             }
             else
             {
-                return Ok(token);
+                loginModel.Token = token;
+                return Ok(loginModel);
             }
         }
         #region Commented By me
@@ -155,13 +156,13 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("getflightbooking/{id}")]
+        [HttpGet("getflightbooking/{id}/{flightid}")]
         //[Route("ticket")]
-        public ActionResult GetFlightBooking(Guid id)
+        public ActionResult GetFlightBooking(Guid id,Guid? airlineId,Guid? flightid)
         {
             try
             {
-                return Ok(_userService.CreateFlightBookingModel(id));
+                return Ok(_userService.CreateFlightBookingModel(id, flightid));
             }
             catch (Exception ex)
             {

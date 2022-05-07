@@ -15,6 +15,7 @@ namespace UserAPIServices.Models
         public string FlightNumber { get; set; }     //VARCHAR(500)            not null, 
 
         public string AirlineName { get; set; }
+        
 
         public DateTime FromDate { get; set; }         //datetime2(7)            null, 
 
@@ -53,5 +54,14 @@ namespace UserAPIServices.Models
         public int SeatNo { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+    }
+
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public string Token { get; set; }
+
     }
 }

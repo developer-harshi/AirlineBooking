@@ -61,6 +61,9 @@ namespace UserAPIServices.Models
         //[Column("Status")]
         public bool Status { get; set; }//bit                     null,
         public string SeatNos { get; set; }
+        public decimal? FlightPrice { get; set; }
+        public string AirlineName { get; set; }
+        public decimal? Discount { get; set; }
         public List<BookingPersonsModel> BookingPersonsModel { get; set; }
     }
     public class AirlineModel

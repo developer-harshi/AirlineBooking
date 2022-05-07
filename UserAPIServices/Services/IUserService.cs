@@ -14,7 +14,7 @@ namespace UserAPIServices.Services
         List<TicketSearchModel> GetTicketHistory(string emailId);
         bool CancelTicket(string pnr);
         FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
-        FlightBookingModel CreateFlightBookingModel(Guid id);
+        FlightBookingModel CreateFlightBookingModel(Guid id,  Guid? flightId);
         List<FlightModel> FlightLu();
         //FlightBookingModel CreateFlightBookingModel(Guid id);
         BookingPersonsModel GetEmptyPerson();
