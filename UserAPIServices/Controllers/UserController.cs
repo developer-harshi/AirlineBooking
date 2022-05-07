@@ -194,7 +194,7 @@ namespace UserAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("ActiveInActive/{tableName}/{id}/{status}")]
+        [HttpGet("activeinActiveuser/{tableName}/{id}/{status}")]
         public ActionResult ActiveInActive(string tableName, Guid id, string status)
         {
             try

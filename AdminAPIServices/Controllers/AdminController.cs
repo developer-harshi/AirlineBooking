@@ -245,7 +245,7 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("savediscount")]
+        [HttpPost("savediscount")]
         //[Route("getallairlines")]
         public ActionResult SaveDiscount(DiscountModel discountModel)
         {
@@ -258,7 +258,7 @@ namespace AdminAPIServices.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("ActiveInActive/{tableName}/{id}/{status}")]
+        [HttpGet("activeincctiveadmin/{tableName}/{id}/{status}")]
         public ActionResult ActiveInActive(string tableName, Guid id, string status)
         {
             try

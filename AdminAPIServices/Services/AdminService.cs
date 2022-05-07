@@ -288,6 +288,7 @@ namespace AdminAPIServices.Services
 
                     flightModel.ToDate = flight.ToDate ?? DateTime.UtcNow.Date;
                     flightModel.ToLocation = flight.ToLocation;
+                    flightModel.AirlineName = flight.AirlineName;
                     flightModels.Add(flightModel);
                 }
                 return flightModels;
@@ -374,7 +375,7 @@ namespace AdminAPIServices.Services
                 int changedStatus = (status.ToLower() == "inactive") ? 1 : 0;
                 SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
                 //var query = $"select Status from dbo.UserRegistrestion where Email='{userName}' and [Password]='{password}'";
-                var query = $"update '{tableName}' set status='{changedStatus}' where Id='{id}'";
+                var query = $"update {tableName} set status={changedStatus} where Id='{id}'";
                 SqlCommand cmd = new SqlCommand(query, cn);
                 cn.Open();
                 cmd.ExecuteNonQuery();
