@@ -81,10 +81,11 @@ namespace UserAPIServices.Services
             //flightBooking.Veg = flightBookingModel.Veg;
             flightBooking.Discount = flightBookingModel.Discount;
         }
-        public TicketSearchModel GetTicketByPNR(string pnr)
+        public List<TicketSearchModel> GetTicketByPNR(string pnr)
         {
             try
             {
+                List<TicketSearchModel> ticketSearchModels = new List<TicketSearchModel>();
                 TicketSearchModel ticketSearchModel = new TicketSearchModel();
                 List<Persons> lstPersons = new List<Persons>();
                 var booking = _userContext.FlightBooking.Where(c => c.PNRNumber == pnr).FirstOrDefault();
@@ -99,10 +100,10 @@ namespace UserAPIServices.Services
                             FillPersons(lstPersons, persons);
                         }
                         ticketSearchModel.Persons = lstPersons;
-
+                        ticketSearchModels.Add(ticketSearchModel);
                     }
                 }
-                return ticketSearchModel;
+                return ticketSearchModels;
             }
             catch (Exception ex)
             {

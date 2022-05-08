@@ -10,7 +10,7 @@ namespace UserAPIServices.Services
     public interface IUserService
     {
         FlightBookingModel SaveFlightBooking(FlightBookingModel flightBookingModel);
-        TicketSearchModel GetTicketByPNR(string pnr);
+        List<TicketSearchModel> GetTicketByPNR(string pnr);
         List<TicketSearchModel> GetTicketHistory(string emailId);
         bool CancelTicket(string pnr);
         FlightSearchResults SearchFlights(FlightSearchModel flightSearchModel);
