@@ -10,7 +10,7 @@ using UserAPIServices.Context;
 namespace UserAPIServices.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20220424130429_userContextMigration")]
+    [Migration("20220509105111_userContextMigration")]
     partial class userContextMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace UserAPIServices.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ActiveStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactAddress")
                         .HasColumnName("ContactAddress")
@@ -88,7 +91,7 @@ namespace UserAPIServices.Migrations
                         .HasColumnName("NonVeg")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(16,2)");
 
                     b.Property<int>("SeatNo")
@@ -104,6 +107,26 @@ namespace UserAPIServices.Migrations
                     b.HasIndex("FlightBookingId");
 
                     b.ToTable("BookingPersons");
+                });
+
+            modelBuilder.Entity("UserAPIServices.Entities.Discount", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CouponName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("Value")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discount");
                 });
 
             modelBuilder.Entity("UserAPIServices.Entities.Flight", b =>
@@ -202,13 +225,16 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<decimal?>("Discount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<Guid?>("FlightId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FlightNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FromDate")
+                    b.Property<DateTime?>("FromDate")
                         .HasColumnName("FromDate")
                         .HasColumnType("datetime2");
 
@@ -217,11 +243,11 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int>("NoOfBUSeats")
+                    b.Property<int?>("NoOfBUSeats")
                         .HasColumnName("NoOfBUSeats")
                         .HasColumnType("int");
 
-                    b.Property<int>("NoOfNONBUSeats")
+                    b.Property<int?>("NoOfNONBUSeats")
                         .HasColumnName("NoOfNONBUSeats")
                         .HasColumnType("int");
 
@@ -247,7 +273,7 @@ namespace UserAPIServices.Migrations
                         .HasColumnName("Status")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ToDate")
+                    b.Property<DateTime?>("ToDate")
                         .HasColumnName("ToDate")
                         .HasColumnType("datetime2");
 
@@ -256,7 +282,7 @@ namespace UserAPIServices.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<decimal>("TotalPrice")
+                    b.Property<decimal?>("TotalPrice")
                         .HasColumnType("decimal(16,2)");
 
                     b.Property<Guid?>("UserRegistrestionId")
